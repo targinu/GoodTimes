@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">atividaden1</string>
+    <string name="title_activity_login">activity_login</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="insira_senha">Senha</string>
+    <string name="conf_senha">Repita a senha</string>
+    <string name="logar">Fazer Login</string>
+    <string name="Cadastrar">Cadastrar-se</string>
+    <string name="não_possui">Não possui cadastro?</string>
+    <string name="nome_user">Nome de usuário</string>
+    <string name="title_activity_cadastrar">activity_cadastrar</string>
+    <string name="ou">ou</string>
+    <string name="logo">Logo</string>
+    <string name="deslogar">Deslogar</string>
+
+</resources>
