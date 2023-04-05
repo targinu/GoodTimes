@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.SearchView
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
@@ -16,14 +18,49 @@ class ClientesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityClientesBinding
     private lateinit var database: FirebaseDatabase
     private lateinit var clienteRef: DatabaseReference
+    private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityClientesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Iniciando a tabela
         val tableLayout = findViewById<TableLayout>(R.id.tableLayout)
         val databaseRef = FirebaseDatabase.getInstance().getReference("clientes")
+
+        //Fazendo pesquisa dos clientes
+        val searchView = findViewById<SearchView>(R.id.search_view)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText.isNullOrEmpty()) {
+                    // Exibe todos os itens
+                    for (i in 0 until tableLayout.childCount) {
+                        val row = tableLayout.getChildAt(i) as TableRow
+                        row.visibility = View.VISIBLE
+                    }
+                } else {
+                    // Filtra os itens
+                    for (i in 0 until tableLayout.childCount) {
+                        val row = tableLayout.getChildAt(i) as TableRow
+                        val codigo = (row.getChildAt(0) as TextView).text.toString()
+                        val nome = (row.getChildAt(1) as TextView).text.toString()
+                        val orcamento = (row.getChildAt(2) as TextView).text.toString()
+
+                        if (!codigo.contains(newText, true) && !nome.contains(newText, true) && !orcamento.contains(newText, true)) {
+                            row.visibility = View.GONE
+                        } else {
+                            row.visibility = View.VISIBLE
+                        }
+                    }
+                }
+                return true
+            }
+        })
 
         //Adiciona um listener
         databaseRef.addValueEventListener(object : ValueEventListener {
