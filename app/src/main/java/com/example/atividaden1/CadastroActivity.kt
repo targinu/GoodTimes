@@ -14,7 +14,6 @@ class CadastroActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-
         binding = ActivityCadastrarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -43,6 +42,13 @@ class CadastroActivity : AppCompatActivity() {
                 Toast.makeText(this,"Os campos deve ser preenchidos!", Toast.LENGTH_SHORT).show()
             }
         }
+
+        binding.btnVoltar.setOnClickListener{
+            val intent = Intent(this,LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
     }
 
 }

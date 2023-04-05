@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CadastroClienteActivity">
+
+    <TextView
+        android:id="@+id/textViewNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nome do cliente" />
+
+    <EditText
+        android:id="@+id/editTextNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="insira o nome"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/textViewCodigo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Código do cliente" />
+
+    <EditText
+        android:id="@+id/editTextCodigo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="insira o código"
+        android:inputType="number"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/textViewOrcamento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Orçamento do cliente" />
+
+    <EditText
+        android:id="@+id/editTextOrcamento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="insira o orçamento"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/buttonSalvar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salvar" />
+
+</LinearLayout>

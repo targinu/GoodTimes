@@ -19,6 +19,13 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+        binding.btnGerenciarCliente.setOnClickListener{
+            val intent = Intent(this,ClientesActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        //DESLOGAR USUÁRIO
         binding.deslogar.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(this,LoginActivity::class.java)

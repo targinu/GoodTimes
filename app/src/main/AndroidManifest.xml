@@ -24,6 +24,8 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".CadastroActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".ClientesActivity"/>
+        <activity android:name=".CadastroClienteActivity"/>
     </application>
 
 </manifest>
