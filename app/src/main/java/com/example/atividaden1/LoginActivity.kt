@@ -54,13 +54,13 @@ class LoginActivity : AppCompatActivity() {
         val usuarioAtual = FirebaseAuth.getInstance().currentUser
         if (usuarioAtual != null) {
             Toast.makeText(this,"Bem vindo de volta!", Toast.LENGTH_SHORT).show()
-            TelaUser()
+            telaUser()
         } else {
             Toast.makeText(this,"Faça login para prosseguir!", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun TelaUser() {
+    private fun telaUser() {
         val intent = Intent(this,MainActivity::class.java)
         startActivity(intent)
         finish()
