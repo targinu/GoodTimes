@@ -51,7 +51,7 @@ class ClientesActivity : AppCompatActivity() {
                         val nome = (row.getChildAt(1) as TextView).text.toString()
                         val orcamento = (row.getChildAt(2) as TextView).text.toString()
 
-                        if (!codigo.contains(newText, true) && !nome.contains(newText, true) && !orcamento.contains(newText, true)) {
+                        if (!codigo.contains(newText, true) && !nome.contains(newText, true)) {
                             row.visibility = View.GONE
                         } else {
                             row.visibility = View.VISIBLE
@@ -82,17 +82,17 @@ class ClientesActivity : AppCompatActivity() {
 
                     val nomeTextView = TextView(this@ClientesActivity)
                     nomeTextView.text = nome
-                    nomeTextView.setPadding(8, 8, 8, 8)
+                    nomeTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(nomeTextView)
 
                     val codigoTextView = TextView(this@ClientesActivity)
                     codigoTextView.text = codigo
-                    codigoTextView.setPadding(8, 8, 8, 8)
+                    codigoTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(codigoTextView)
 
                     val orcamentoTextView = TextView(this@ClientesActivity)
                     orcamentoTextView.text = orcamento
-                    orcamentoTextView.setPadding(8, 8, 8, 8)
+                    orcamentoTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(orcamentoTextView)
 
                     tableLayout.addView(tableRow)
