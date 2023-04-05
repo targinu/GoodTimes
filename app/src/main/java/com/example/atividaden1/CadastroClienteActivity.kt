@@ -1,5 +1,6 @@
 package com.example.atividaden1
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,16 @@ class CadastroClienteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCadastrarClienteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val bundle = intent.extras
+        val nome = bundle?.getString("nome")
+        val codigo = bundle?.getString("codigo")
+        val orcamento = bundle?.getString("orcamento")
+
+        //Utiliza os dados para preencher os campos de edição
+        binding.editTextNome.setText(nome)
+        binding.editTextCodigo.setText(codigo)
+        binding.editTextOrcamento.setText(orcamento)
 
         binding.buttonSalvar.setOnClickListener {
             val nome = binding.editTextNome.text.toString()
@@ -37,5 +48,13 @@ class CadastroClienteActivity : AppCompatActivity() {
                 Toast.makeText(this,"Falha ao cadastrar cliente!",Toast.LENGTH_SHORT).show()
             }
         }
+
+        //Voltar para a pagina anterior
+        binding.btnVoltar.setOnClickListener{
+            val intent = Intent(this,ClientesActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
     }
 }

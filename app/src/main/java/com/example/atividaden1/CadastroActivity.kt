@@ -65,6 +65,7 @@ class CadastroActivity : AppCompatActivity() {
             }
         }
 
+        //Voltar para a pagina anterior
         binding.btnVoltar.setOnClickListener{
             val intent = Intent(this,LoginActivity::class.java)
             startActivity(intent)

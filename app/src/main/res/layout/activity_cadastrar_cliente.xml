@@ -7,23 +7,35 @@
     tools:context=".CadastroClienteActivity">
 
     <TextView
+        android:id="@+id/btnVoltar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="voltar"
+        android:layout_margin="10dp"/>
+
+    <TextView
         android:id="@+id/textViewNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nome do cliente" />
+        android:text="Nome do cliente"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
 
     <EditText
         android:id="@+id/editTextNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="insira o nome"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <TextView
         android:id="@+id/textViewCodigo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Código do cliente" />
+        android:text="Código do cliente"
+        android:layout_marginLeft="10dp"/>
 
     <EditText
         android:id="@+id/editTextCodigo"
@@ -31,13 +43,16 @@
         android:layout_height="wrap_content"
         android:hint="insira o código"
         android:inputType="number"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <TextView
         android:id="@+id/textViewOrcamento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Orçamento do cliente" />
+        android:text="Orçamento do cliente"
+        android:layout_marginLeft="10dp"/>
 
     <EditText
         android:id="@+id/editTextOrcamento"
@@ -45,7 +60,9 @@
         android:layout_height="wrap_content"
         android:hint="insira o orçamento"
         android:inputType="numberDecimal"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <Button
         android:id="@+id/buttonSalvar"
