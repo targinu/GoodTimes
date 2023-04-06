@@ -19,8 +19,16 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+        //Ir para a página de clientes
         binding.btnGerenciarCliente.setOnClickListener{
             val intent = Intent(this,ClientesActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        //Ir para a página de ordem de serviço
+        binding.btnGerenciarOS.setOnClickListener{
+            val intent = Intent(this,OsActivity::class.java)
             startActivity(intent)
             finish()
         }

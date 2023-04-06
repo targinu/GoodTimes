@@ -33,18 +33,20 @@ class CadastroActivity : AppCompatActivity() {
                     firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener{
                         if (it.isSuccessful){
 
+                            /**
+                             //Adiciona o nome de usuario no banco de dados
                             database = FirebaseDatabase.getInstance().getReference("users")
                             val User = User(nome,email)
                             database.child(email).setValue(User).addOnSuccessListener {
 
                             }.addOnFailureListener{
                                 Toast.makeText(this,"Falha ao cadastrar usuario!",Toast.LENGTH_SHORT).show()
-                            }
+                            }**/
 
                             Toast.makeText(this,"Usuario criado com sucesso!", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this,LoginActivity::class.java)
                             startActivity(intent)
-
+                            finish()
                         }else
                         {
                             Toast.makeText(this,"Não foi possivel realizar o cadastro!", Toast.LENGTH_SHORT).show()

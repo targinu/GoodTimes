@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CadastroOsActivity">
+
+    <TextView
+        android:id="@+id/btnVoltar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="voltar"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/textViewProduto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Produto"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextNomeProduto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="insira o nome do produto"
+        android:minHeight="48dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <TextView
+        android:id="@+id/textViewCodigo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Código do produto"
+        android:layout_marginLeft="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextCodigo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="insira o código do produto"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <TextView
+        android:id="@+id/textViewQuantidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quantidade do produto"
+        android:layout_marginLeft="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextQuantidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="insira a quantidade do produto"
+        android:inputType="number"
+        android:minHeight="48dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <TextView
+        android:id="@+id/textViewPreco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Preço do produto"
+        android:layout_marginLeft="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextPreco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="insira o preço do produto"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <TextView
+        android:id="@+id/textViewDesconto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Desconto"
+        android:layout_marginLeft="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextDesconto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="insira o desconto"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <TextView
+        android:id="@+id/textViewTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Valor Total"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/textViewValorTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/textViewComentario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Comentário"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextComentario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="insira um comentário"
+        android:inputType="numberDecimal"
+        android:minHeight="96dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+
+    <Button
+        android:id="@+id/buttonSalvar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salvar" />
+
+</LinearLayout>

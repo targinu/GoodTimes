@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Atividaden1"
         tools:targetApi="31">
         <activity
+            android:name=".activity_cadastrar_os"
+            android:exported="false" />
+        <activity
             android:name=".SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
@@ -24,8 +27,10 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".CadastroActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ClientesActivity"/>
-        <activity android:name=".CadastroClienteActivity"/>
+        <activity android:name=".ClientesActivity" />
+        <activity android:name=".CadastroClienteActivity" />
+        <activity android:name=".OsActivity" />
+        <activity android:name=".CadastroOsActivity" />
     </application>
 
 </manifest>

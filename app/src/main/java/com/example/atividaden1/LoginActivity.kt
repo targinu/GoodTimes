@@ -30,8 +30,6 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.username.text.toString()
             val pass = binding.password.text.toString()
 
-
-
             if (email.isNotEmpty() && pass.isNotEmpty()){
                    firebaseAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener{
                         if (it.isSuccessful){
