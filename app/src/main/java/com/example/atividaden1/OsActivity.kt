@@ -16,6 +16,13 @@ class OsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        //Ir para a tela de cadastro de Ordem de serviço
+        binding.btnCadastrarOs.setOnClickListener{
+            val intent = Intent(this,CadastroOsActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         //VOLTAR PARA A TELA INICIAL
         binding.btnVoltar.setOnClickListener{
             val intent = Intent(this,MainActivity::class.java)

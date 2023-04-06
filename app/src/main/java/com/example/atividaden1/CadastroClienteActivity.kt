@@ -22,17 +22,19 @@ class CadastroClienteActivity : AppCompatActivity() {
         val bundle = intent.extras
         val nome = bundle?.getString("nome")
         val codigo = bundle?.getString("codigo")
-        val orcamento = bundle?.getString("orcamento")
+        val orcamento = bundle?.getString("orcamento")?.toFloat()
 
         //Utiliza os dados para preencher os campos de edição
         binding.editTextNome.setText(nome)
         binding.editTextCodigo.setText(codigo)
-        binding.editTextOrcamento.setText(orcamento)
+        binding.editTextOrcamento.setText(orcamento?.toString() ?: "")
 
         binding.buttonSalvar.setOnClickListener {
             val nome = binding.editTextNome.text.toString()
             val codigo = binding.editTextCodigo.text.toString()
-            val orcamento = binding.editTextOrcamento.text.toString()
+
+            //teste
+            val orcamento = binding.editTextOrcamento.text.toString().toFloat()
 
             database = FirebaseDatabase.getInstance().getReference("clientes")
             val Cliente = Cliente(nome,codigo,orcamento)

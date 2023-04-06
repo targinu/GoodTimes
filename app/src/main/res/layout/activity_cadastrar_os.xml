@@ -14,51 +14,99 @@
         android:layout_margin="10dp"/>
 
     <TextView
-        android:id="@+id/textViewProduto"
+        android:id="@+id/textViewSelecao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Produto"
+        android:text="Selecione o cliente"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"/>
 
-    <EditText
-        android:id="@+id/editTextNomeProduto"
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Pesquisar cliente"/>
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        tools:layout_editor_absoluteX="0dp">
+
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="30dp"
+                android:stretchColumns="*">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Nome"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Código"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Orçamento"
+                        android:textSize="16sp" />
+                </TableRow>
+            </TableLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textViewServico"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="insira o nome do produto"
+        android:text="Serviço"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/editTextNomeServico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="insira o nome do serviço"
         android:minHeight="48dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
 
     <TextView
-        android:id="@+id/textViewCodigo"
+        android:id="@+id/textViewId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Código do produto"
-        android:layout_marginLeft="10dp"/>
-
-    <EditText
-        android:id="@+id/editTextCodigo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="insira o código do produto"
-        android:inputType="number"
-        android:minHeight="48dp"
+        android:text="ID do serviço"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
-
-    <TextView
-        android:id="@+id/textViewQuantidade"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Quantidade do produto"
-        android:layout_marginLeft="10dp"/>
+        android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/editTextQuantidade"
+        android:id="@+id/editTextId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="insira a quantidade do produto"
+        android:hint="insira o ID do serviço"
         android:inputType="number"
         android:minHeight="48dp"
         android:layout_marginLeft="10dp"
@@ -68,14 +116,15 @@
         android:id="@+id/textViewPreco"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Preço do produto"
-        android:layout_marginLeft="10dp"/>
+        android:text="Preço do serviço"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/editTextPreco"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="insira o preço do produto"
+        android:hint="insira o preço do serviço"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
         android:layout_marginLeft="10dp"
@@ -86,7 +135,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Desconto"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/editTextDesconto"
@@ -103,7 +153,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Valor Total"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textViewValorTotal"
@@ -118,7 +169,8 @@
         android:layout_height="wrap_content"
         android:text="Comentário"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/editTextComentario"
@@ -136,5 +188,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Salvar" />
+
 
 </LinearLayout>

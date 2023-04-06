@@ -46,7 +46,6 @@ class ClientesActivity : AppCompatActivity() {
                         val row = tableLayout.getChildAt(i) as TableRow
                         val codigo = (row.getChildAt(0) as TextView).text.toString()
                         val nome = (row.getChildAt(1) as TextView).text.toString()
-                        val orcamento = (row.getChildAt(2) as TextView).text.toString()
 
                         if (!codigo.contains(newText, true) && !nome.contains(newText, true)) {
                             row.visibility = View.GONE
@@ -69,7 +68,7 @@ class ClientesActivity : AppCompatActivity() {
                 for (clienteSnapshot in snapshot.children) {
                     val nome = clienteSnapshot.child("nome").getValue(String::class.java)
                     val codigo = clienteSnapshot.child("codigo").getValue(String::class.java)
-                    val orcamento = clienteSnapshot.child("orcamento").getValue(String::class.java)
+                    val orcamento = clienteSnapshot.child("orcamento").getValue(Float::class.java)
 
                     //Cria uma nova linha na tabela
                     val tableRow = TableRow(this@ClientesActivity)
@@ -90,7 +89,7 @@ class ClientesActivity : AppCompatActivity() {
                     tableRow.addView(codigoTextView)
 
                     val orcamentoTextView = TextView(this@ClientesActivity)
-                    orcamentoTextView.text = orcamento
+                    orcamentoTextView.text = orcamento?.toFloat().toString()
                     orcamentoTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(orcamentoTextView)
 
@@ -114,7 +113,7 @@ class ClientesActivity : AppCompatActivity() {
                         val bundle = Bundle().apply {
                             putString("nome", nome)
                             putString("codigo", codigo)
-                            putString("orcamento", orcamento)
+                            putFloat("orcamento", orcamento!!)
                         }
                         intent.putExtras(bundle)
                         startActivity(intent)
