@@ -9,20 +9,19 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.atividaden1.databinding.ActivityCadastrarOsBinding
 import com.google.firebase.database.*
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class CadastroOsActivity: AppCompatActivity(){
 
     private lateinit var binding: ActivityCadastrarOsBinding
-
-    private lateinit var database: FirebaseDatabase
-    private lateinit var clienteRef: DatabaseReference
+    private lateinit var database: DatabaseReference
     private lateinit var searchView: SearchView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCadastrarOsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         //Iniciando a tabela
         val tableLayout = findViewById<TableLayout>(R.id.tableLayout)
         val databaseRef = FirebaseDatabase.getInstance().getReference("clientes")
@@ -102,7 +101,33 @@ class CadastroOsActivity: AppCompatActivity(){
                 Log.d(ContentValues.TAG, "Falha ao carregar clientes.", error.toException())
             }
         })
-        //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+        /**
+        //Salvar Ordem de Serviço no banco
+        binding.buttonSalvar.setOnClickListener {
+            val nomeServico = binding.editTextNomeServico.text.toString()
+            val id = binding.editTextId.text.toString()
+            val preco = binding.editTextPreco.text.toString().toFloat()
+            val desconto = binding.editTextDesconto.text.toString().toFloat()
+            val total = binding.textViewValorTotal.text.toString().toFloat()
+            val comentario = binding.editTextComentario.text.toString()
+
+            database = FirebaseDatabase.getInstance().getReference("ordens")
+            val OrdemDeServico = OrdemDeServico(Cliente(),nomeServico,id,preco,desconto,total,comentario)
+            database.child(id).setValue(OrdemDeServico).addOnSuccessListener {
+
+                binding.editTextNomeServico.text.clear()
+                binding.editTextId.text.clear()
+                binding.editTextPreco.text.clear()
+                binding.editTextDesconto.text.clear()
+                //binding.textViewValorTotal.text.clear()
+
+                Toast.makeText(this,"Ordem cadastrada com sucesso!",Toast.LENGTH_SHORT).show()
+
+            }.addOnFailureListener{
+                Toast.makeText(this,"Falha ao cadastrar ordem!",Toast.LENGTH_SHORT).show()
+            }
+        }**/
 
         //Voltar para ordem de serviço
         binding.btnVoltar.setOnClickListener{
