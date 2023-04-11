@@ -29,6 +29,9 @@ class CadastroActivity : AppCompatActivity() {
             val pass = binding.senha.text.toString()
             val confirmPass = binding.confSenha.text.toString()
 
+
+
+
             if (email.isNotEmpty() && pass.isNotEmpty() && confirmPass.isNotEmpty()){
                 if (pass == confirmPass){
                     firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener{
@@ -52,7 +55,6 @@ class CadastroActivity : AppCompatActivity() {
                             //As duas linhas abaixo devem ser excluídas
 //                            Toast.makeText(this, "Não foi possível realizar o cadastro!", Toast.LENGTH_SHORT).show()
 //                            Log.e("CadastroActivity", "Erro ao criar usuário", it.exception)
-
 
                             Toast.makeText(this,"Não foi possivel realizar o cadastro!", Toast.LENGTH_SHORT).show()
                             binding.username.text.clear()
