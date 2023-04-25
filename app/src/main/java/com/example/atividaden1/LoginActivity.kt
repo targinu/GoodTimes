@@ -53,10 +53,18 @@ class LoginActivity : AppCompatActivity() {
             val user = firebaseAuth.currentUser
             if (user == null && !userLoggedOutInAnotherDevice) {
                 //O usuário foi desautenticado em outro dispositivo, desloga o usuário desta sessão
-                Toast.makeText(this, "Você foi deslogado em outro dispositivo!", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Você foi deslogado em outro dispositivo!", Toast.LENGTH_SHORT).show()
                 userLoggedOutInAnotherDevice = true
                 firebaseAuth.signOut()
             }
+        }
+
+
+        //Ir para a pagina sobre
+        binding.sobre.setOnClickListener{
+            val intent = Intent(this,SobreActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
     }
@@ -72,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this,"Bem vindo de volta!", Toast.LENGTH_SHORT).show()
             telaUser()
         } else {
-            Toast.makeText(this,"Faça login para prosseguir!", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this,"Faça login para prosseguir!", Toast.LENGTH_SHORT).show()
         }
     }
 
