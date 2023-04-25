@@ -173,24 +173,6 @@
         android:text="total"
         android:layout_marginLeft="10dp"/>
 
-    <TextView
-        android:id="@+id/textViewComentario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Comentário"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:textStyle="bold"/>
-
-    <EditText
-        android:id="@+id/editTextComentario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="insira um comentário"
-        android:minHeight="96dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
-
 
     <Button
         android:id="@+id/buttonSalvar"
