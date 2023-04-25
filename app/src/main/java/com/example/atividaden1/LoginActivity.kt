@@ -13,6 +13,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var binding: ActivityLoginBinding
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
+    private var userLoggedOutInAnotherDevice = false
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -50,9 +51,10 @@ class LoginActivity : AppCompatActivity() {
         //Adiciona o Auth State Listener
         authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
             val user = firebaseAuth.currentUser
-            if (user == null) {
+            if (user == null && !userLoggedOutInAnotherDevice) {
                 //O usuário foi desautenticado em outro dispositivo, desloga o usuário desta sessão
                 Toast.makeText(this, "Você foi deslogado em outro dispositivo!", Toast.LENGTH_SHORT).show()
+                userLoggedOutInAnotherDevice = true
                 firebaseAuth.signOut()
             }
         }
@@ -61,6 +63,8 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        userLoggedOutInAnotherDevice = false
+
         firebaseAuth.addAuthStateListener(authStateListener)
 
         val usuarioAtual = FirebaseAuth.getInstance().currentUser
