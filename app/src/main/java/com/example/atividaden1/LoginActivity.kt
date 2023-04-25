@@ -47,12 +47,13 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        //Adiciona o listener para monitorar o estado de autenticação
+        //Adiciona o Auth State Listener
         authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
-            val currentUser = firebaseAuth.currentUser
-            if (currentUser == null) {
-                //Usuário não autenticado
-                Toast.makeText(this, "Sua sessão foi encerrada em outro dispositivo", Toast.LENGTH_SHORT).show()
+            val user = firebaseAuth.currentUser
+            if (user == null) {
+                //O usuário foi desautenticado em outro dispositivo, desloga o usuário desta sessão
+                Toast.makeText(this, "Você foi deslogado em outro dispositivo!", Toast.LENGTH_SHORT).show()
+                firebaseAuth.signOut()
             }
         }
 
@@ -61,6 +62,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         firebaseAuth.addAuthStateListener(authStateListener)
+
         val usuarioAtual = FirebaseAuth.getInstance().currentUser
         if (usuarioAtual != null) {
             Toast.makeText(this,"Bem vindo de volta!", Toast.LENGTH_SHORT).show()
