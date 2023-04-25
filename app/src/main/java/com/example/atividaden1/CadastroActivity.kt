@@ -29,14 +29,14 @@ class CadastroActivity : AppCompatActivity() {
             val pass = binding.senha.text.toString()
             val confirmPass = binding.confSenha.text.toString()
 
-
-
-
             if (email.isNotEmpty() && pass.isNotEmpty() && confirmPass.isNotEmpty()){
                 if (pass == confirmPass){
                     firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener{
                         if (it.isSuccessful){
-                             //Adiciona o nome de usuario no banco de dados
+
+                            /** não é necessario mas seria interessante pra controle
+                             * de usuarios cadastrados - está crashando
+                            //Adiciona o nome de usuario no banco de dados
                             database = FirebaseDatabase.getInstance().getReference("users")
                             val User = User(nome,email)
                             database.child(email).setValue(User).addOnSuccessListener {
@@ -44,6 +44,7 @@ class CadastroActivity : AppCompatActivity() {
                             }.addOnFailureListener{
                                 Toast.makeText(this,"Falha ao cadastrar usuario!",Toast.LENGTH_SHORT).show()
                             }
+                            **/
 
                             Toast.makeText(this,"Usuario criado com sucesso!", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this,LoginActivity::class.java)
@@ -51,11 +52,6 @@ class CadastroActivity : AppCompatActivity() {
                             finish()
                         }else
                         {
-
-                            //As duas linhas abaixo devem ser excluídas
-//                            Toast.makeText(this, "Não foi possível realizar o cadastro!", Toast.LENGTH_SHORT).show()
-//                            Log.e("CadastroActivity", "Erro ao criar usuário", it.exception)
-
                             Toast.makeText(this,"Não foi possivel realizar o cadastro!", Toast.LENGTH_SHORT).show()
                             binding.username.text.clear()
                             binding.email.text.clear()
