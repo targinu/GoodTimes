@@ -20,8 +20,6 @@
     <string name="logo">Logo</string>
     <string name="deslogar">Deslogar</string>
     <string name="sobre">sobre</string>
-    <string name="sobre_empresa">GoodTimes é uma empresa de ordens de serviços que oferece soluções personalizadas para atender às necessidades de manutenção e reparação de seus clientes. Com anos de experiência na indústria, a GoodTimes é especializada em fornecer serviços de alta qualidade para uma ampla gama de setores, incluindo indústrias, construção civil, telecomunicações, transporte e muito mais.
-
-A empresa se orgulha de sua equipe altamente qualificada e treinada, composta por técnicos e engenheiros experientes, que são capazes de resolver problemas complexos de maneira rápida e eficiente. A GoodTimes também utiliza tecnologias avançadas e equipamentos modernos para garantir que cada serviço seja realizado com precisão e eficácia.</string>
-
+    <string name="sobre_empresa_parte1">GoodTimes é uma empresa de ordens de serviços que oferece soluções personalizadas para atender às necessidades de manutenção e reparação de seus clientes. Com anos de experiência na indústria, a GoodTimes é especializada em fornecer serviços de alta qualidade para uma ampla gama de setores, incluindo indústrias, construção civil, telecomunicações, transporte e muito mais.</string>
+    <string name="sobre_empresa_parte2">A empresa se orgulha de sua equipe altamente qualificada e treinada, composta por técnicos e engenheiros experientes, que são capazes de resolver problemas complexos de maneira rápida e eficiente. A GoodTimes também utiliza tecnologias avançadas e equipamentos modernos para garantir que cada serviço seja realizado com precisão e eficácia.</string>
 </resources>

@@ -11,30 +11,19 @@
     tools:context=".ComentarioActivity">
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:gravity="center_horizontal"
         tools:context=".sobreactivity">
-
-        <TextView
-            android:id="@+id/btnVoltar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="voltar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/logo"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="116dp"
             android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
             android:src="@mipmap/ic_goodtimes"
             app:layout_constraintBottom_toTopOf="@+id/GoodTimes"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,11 +33,29 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/sobre_empresa"
-            android:textSize="20sp"
-            android:justificationMode="inter_word"/>
+            android:layout_height="wrap_content"
+            android:text="@string/sobre_empresa_parte1"
+            android:textSize="18sp"
+            android:lineSpacingExtra="4dp"
+            android:justificationMode="inter_word"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sobre_empresa_parte2"
+            android:textSize="18sp"
+            android:lineSpacingExtra="4dp"
+            android:justificationMode="inter_word"
+            android:layout_marginTop="0dp"/>
 
 
+
+        <Button
+            android:id="@+id/btnVoltar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="voltar"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
-    </ScrollView>
+</ScrollView>
