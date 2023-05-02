@@ -190,14 +190,12 @@ class CadastroOsActivity: AppCompatActivity(){
 
             database = FirebaseDatabase.getInstance().getReference("ordens")
             val OrdemDeServico = OrdemDeServico(selectedCliente!!,nomeServico,id,preco,desconto,total)
-            //val OrdemDeServico = OrdemDeServico(nomeServico,id,preco,desconto,total)
             database.child(id).setValue(OrdemDeServico).addOnSuccessListener {
 
                 binding.editTextNomeServico.text.clear()
                 binding.editTextId.text.clear()
                 binding.editTextPreco.text.clear()
                 binding.editTextDesconto.text.clear()
-                //binding.textViewValorTotal.text.clear()
 
                 Toast.makeText(this,"Ordem cadastrada com sucesso!",Toast.LENGTH_SHORT).show()
 
