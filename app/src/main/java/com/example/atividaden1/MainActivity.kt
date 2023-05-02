@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-
         //DESLOGAR USUÁRIO
         binding.deslogar.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
