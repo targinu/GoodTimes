@@ -33,6 +33,20 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
+        //Ir para a página de sobre da empresa
+        binding.logo.setOnClickListener{
+            val intent = Intent(this,SobreActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        binding.txtGoodTimes.setOnClickListener{
+            val intent = Intent(this,SobreActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+
         //DESLOGAR USUÁRIO
         binding.deslogar.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
