@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">atividaden1</string>
+    <string name="app_name">Good Times</string>
     <string name="title_activity_login">activity_login</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

@@ -3,6 +3,8 @@ package com.example.atividaden1
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -58,7 +60,7 @@ class CadastroOsActivity: AppCompatActivity(){
             }
         })
 
-        //Adiciona um listener
+        //Adiciona um listener para adicionar os clientes na tabela
         databaseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 //Limpa as linhas da tabela
@@ -102,6 +104,41 @@ class CadastroOsActivity: AppCompatActivity(){
             }
         })
 
+        //Função que calcula o valor total
+        //Captura as referências das Views
+        val editTextPreco = binding.editTextPreco
+        val editTextDesconto = binding.editTextDesconto
+        val textViewValorTotal = binding.textViewValorTotal
+
+        //Adiciona um listener para atualizar o valor total quando o preço ou o desconto forem alterados
+        editTextPreco.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                calcularValorTotal(editTextPreco, editTextDesconto, textViewValorTotal)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                //Não é necessário fazer nada aqui, porém é necessario declarar
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                //Não é necessário fazer nada aqui, porém é necessario declarar
+            }
+        })
+
+        editTextDesconto.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                calcularValorTotal(editTextPreco, editTextDesconto, textViewValorTotal)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                //Não é necessário fazer nada aqui, porém é necessario declarar
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                //Não é necessário fazer nada aqui, porém é necessario declarar
+            }
+        })
+
         /**
         //Salvar Ordem de Serviço no banco
         binding.buttonSalvar.setOnClickListener {
@@ -135,5 +172,13 @@ class CadastroOsActivity: AppCompatActivity(){
             startActivity(intent)
             finish()
         }
+    }
+
+    //Método para calcular e exibir o valor total
+    private fun calcularValorTotal(editTextPreco: EditText, editTextDesconto: EditText, textViewValorTotal: TextView) {
+        val preco = editTextPreco.text.toString().toFloatOrNull() ?: 0f
+        val desconto = editTextDesconto.text.toString().toFloatOrNull() ?: 0f
+        val valorTotal = preco - desconto
+        textViewValorTotal.text = valorTotal.toString()
     }
 }
