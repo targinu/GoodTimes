@@ -31,8 +31,9 @@
         <activity android:name=".CadastroClienteActivity" />
         <activity android:name=".OsActivity" />
         <activity android:name=".CadastroOsActivity" />
-        <activity android:name=".ComentarioActivity"/>
+        <activity android:name=".ComentarActivity"/>
         <activity android:name=".SobreActivity"/>
+        <activity android:name=".ComentariosActivity"/>
     </application>
 
 </manifest>

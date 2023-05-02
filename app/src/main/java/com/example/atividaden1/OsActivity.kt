@@ -132,22 +132,14 @@ class OsActivity : AppCompatActivity() {
                     tableRow.addView(excluirImageView)
                     **/
 
-                    /** usar essa parte para ir para comentarios
-                    //Edição de clientes
+                    //Ir para tela de Comentarios
                     //Adiciona um OnClickListener para cada linha da tabela
                     tableRow.setOnClickListener {
                         //Cria um Intent para abrir a Activity de edição
-                        val intent = Intent(this@ClientesActivity, CadastroClienteActivity::class.java)
-                        //Transfere os dados do cliente para a pagina de criação para poder editar
-                        val bundle = Bundle().apply {
-                            putString("nome", nome)
-                            putString("codigo", codigo)
-                            putFloat("orcamento", orcamento!!)
-                        }
-                        intent.putExtras(bundle)
+                        val intent = Intent(this@OsActivity, ComentariosActivity::class.java)
                         startActivity(intent)
+                        finish()
                     }
-                    **/
 
                     //Adiciona os dados na tabela
                     tableLayout.addView(tableRow)
