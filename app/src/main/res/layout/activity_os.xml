@@ -64,11 +64,11 @@
         app:layout_constraintVertical_bias="0.022" />
 
     <TextView
-        android:id="@+id/textViewProduto"
+        android:id="@+id/textViewServico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:text="Produto"
+        android:text="Serviço"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/scrollview"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,14 +76,14 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/textViewCod"
+        android:id="@+id/textViewId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Cod."
+        android:text="Id"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/scrollview"
-        app:layout_constraintStart_toEndOf="@+id/textViewProduto"
+        app:layout_constraintStart_toEndOf="@+id/textViewServico"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -96,7 +96,7 @@
         app:layout_constraintBottom_toTopOf="@+id/scrollview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.043"
-        app:layout_constraintStart_toEndOf="@+id/textViewCod"
+        app:layout_constraintStart_toEndOf="@+id/textViewId"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -156,7 +156,6 @@
             android:layout_marginRight="30dp"
             android:stretchColumns="*">
 
-
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -166,7 +165,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Produto"
+                    android:text="Serviço"
                     android:textSize="16sp" />
 
                 <TextView
@@ -174,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:gravity="center"
-                    android:text="Cód."
+                    android:text="Id"
                     android:textSize="16sp" />
 
                 <TextView

@@ -19,6 +19,10 @@ class CadastroOsActivity: AppCompatActivity(){
     private lateinit var binding: ActivityCadastrarOsBinding
     private lateinit var database: DatabaseReference
     private lateinit var searchView: SearchView
+
+    //TESTANDO A FUNÇÃO DE SELECIONAR CLIENTE
+    private var selectedCliente: Cliente? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCadastrarOsBinding.inflate(layoutInflater)
@@ -72,6 +76,10 @@ class CadastroOsActivity: AppCompatActivity(){
                     val codigo = clienteSnapshot.child("codigo").getValue(String::class.java)
                     val orcamento = clienteSnapshot.child("orcamento").getValue(Float::class.java)
 
+                    //TESTANDO FUNÇÃO DE DESTACAR CLIENTE SELECIONADO
+                    val clienteId = clienteSnapshot.key
+                    //TERMINA AQUI
+
                     //Cria uma nova linha na tabela
                     val tableRow = TableRow(this@CadastroOsActivity)
                     tableRow.layoutParams = TableLayout.LayoutParams(
@@ -94,6 +102,39 @@ class CadastroOsActivity: AppCompatActivity(){
                     orcamentoTextView.text = orcamento?.toFloat().toString()
                     orcamentoTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(orcamentoTextView)
+
+                    //Função para selecionar e destacar cliente
+                    //Declara uma variável para armazenar o ID do cliente selecionado
+                    var clienteSelecionadoId: String? = null
+
+                    //Verifica se o ID da linha corresponde ao ID do cliente selecionado
+                    if (clienteId == clienteSelecionadoId) {
+                        tableRow.setBackgroundColor(resources.getColor(android.R.color.darker_gray))
+                    } else {
+                        tableRow.setBackgroundColor(resources.getColor(android.R.color.white))
+                    }
+
+                    //Adiciona um listener para quando a linha for clicada
+                    tableRow.setOnClickListener {
+
+                        selectedCliente = Cliente(nome, codigo, orcamento ?: 0f)
+                        Toast.makeText(this@CadastroOsActivity, "Cliente selecionado:" +
+                                " $selectedCliente", Toast.LENGTH_SHORT).show()
+
+                        //Armazena o ID do cliente selecionado
+                        clienteSelecionadoId = clienteId
+
+                        //Destaca a linha do cliente selecionado e remove o destaque das outras linhas
+                        for (i in 0 until tableLayout.childCount) {
+                            val row = tableLayout.getChildAt(i) as TableRow
+                            val rowClienteId = snapshot.children.elementAt(i).key
+                            if (rowClienteId == clienteSelecionadoId) {
+                                row.setBackgroundColor(resources.getColor(android.R.color.darker_gray))
+                            } else {
+                                row.setBackgroundColor(resources.getColor(android.R.color.white))
+                            }
+                        }
+                    }
 
                     //Adiciona os dados na tabela
                     tableLayout.addView(tableRow)
@@ -139,7 +180,6 @@ class CadastroOsActivity: AppCompatActivity(){
             }
         })
 
-        /**
         //Salvar Ordem de Serviço no banco
         binding.buttonSalvar.setOnClickListener {
             val nomeServico = binding.editTextNomeServico.text.toString()
@@ -147,10 +187,10 @@ class CadastroOsActivity: AppCompatActivity(){
             val preco = binding.editTextPreco.text.toString().toFloat()
             val desconto = binding.editTextDesconto.text.toString().toFloat()
             val total = binding.textViewValorTotal.text.toString().toFloat()
-            val comentario = binding.editTextComentario.text.toString()
 
             database = FirebaseDatabase.getInstance().getReference("ordens")
-            val OrdemDeServico = OrdemDeServico(Cliente(),nomeServico,id,preco,desconto,total,comentario)
+            val OrdemDeServico = OrdemDeServico(selectedCliente!!,nomeServico,id,preco,desconto,total)
+            //val OrdemDeServico = OrdemDeServico(nomeServico,id,preco,desconto,total)
             database.child(id).setValue(OrdemDeServico).addOnSuccessListener {
 
                 binding.editTextNomeServico.text.clear()
@@ -164,7 +204,7 @@ class CadastroOsActivity: AppCompatActivity(){
             }.addOnFailureListener{
                 Toast.makeText(this,"Falha ao cadastrar ordem!",Toast.LENGTH_SHORT).show()
             }
-        }**/
+        }
 
         //Voltar para ordem de serviço
         binding.btnVoltar.setOnClickListener{
