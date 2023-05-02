@@ -66,7 +66,7 @@ class OsActivity : AppCompatActivity() {
 
                 //Preenche a tabela com os dados das ordens de serviço
                 for (ordemSnapshot in snapshot.children) {
-                    //val nomeServico = ordemSnapshot.child("nomeServico").getValue(String::class.java)
+                    val nomeCliente = ordemSnapshot.child("cliente").child("nome").getValue(String::class.java)
                     val id = ordemSnapshot.child("id").getValue(String::class.java)
                     val preco = ordemSnapshot.child("preco").getValue(Float::class.java)
                     val desconto = ordemSnapshot.child("desconto").getValue(Float::class.java)
@@ -81,12 +81,11 @@ class OsActivity : AppCompatActivity() {
 
                     //Cria as colunas da tabela com os dados das ordens
 
-                    /**
-                    val nomeServicoTextView = TextView(this@OsActivity)
-                    nomeServicoTextView.text = nomeServico
-                    nomeServicoTextView.setPadding(8, 0, 8, 50)
-                    tableRow.addView(nomeServicoTextView)
-                    **/
+                    val nomeClienteTextView = TextView(this@OsActivity)
+                    nomeClienteTextView.text = nomeCliente
+                    nomeClienteTextView.setPadding(8, 0, 8, 50)
+                    tableRow.addView(nomeClienteTextView)
+
 
                     val nomeServicoTextView = TextView(this@OsActivity)
                     val nomeServico = ordemSnapshot.child("nomeServico").getValue(String::class.java)
