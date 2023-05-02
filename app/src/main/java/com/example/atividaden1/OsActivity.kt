@@ -137,6 +137,11 @@ class OsActivity : AppCompatActivity() {
                     tableRow.setOnClickListener {
                         //Cria um Intent para abrir a Activity de edição
                         val intent = Intent(this@OsActivity, ComentariosActivity::class.java)
+                        //Transfere os dados do cliente para a pagina de criação para poder editar
+                        val bundle = Bundle().apply {
+                            putString("nomeServico", nomeServico)
+                        }
+                        intent.putExtras(bundle)
                         startActivity(intent)
                         finish()
                     }

@@ -17,6 +17,11 @@ class ComentariosActivity : AppCompatActivity() {
         binding = ActivityComentariosBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val bundle = intent.extras
+        val nomeServico = bundle?.getString("nomeServico")
+
+        //Utiliza os dados para preencher os campos de edição
+        binding.textViewServicoDesc.setText(nomeServico)
 
         //IR PARA A TELA DE CADASTRO DE COMENTARIO
         binding.btnCadastrarComentario.setOnClickListener{
