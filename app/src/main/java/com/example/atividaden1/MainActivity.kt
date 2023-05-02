@@ -33,13 +33,14 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-        //Ir para a página de sobre da empresa
+        //Ir para a página de sobre da empresa ao clicar no logo
         binding.logo.setOnClickListener{
             val intent = Intent(this,SobreActivity::class.java)
             startActivity(intent)
             finish()
         }
 
+        //Ir para a página de sobre da empresa ao clicar no nome
         binding.txtGoodTimes.setOnClickListener{
             val intent = Intent(this,SobreActivity::class.java)
             startActivity(intent)
