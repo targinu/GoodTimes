@@ -28,21 +28,39 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
+        //Adiciona o Auth State Listener
+        authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
+            val user = firebaseAuth.currentUser
+            if (user == null && !userLoggedOutInAnotherDevice) {
+                //O usuário foi desautenticado em outro dispositivo, desloga o usuário desta sessão
+                //Toast.makeText(this, "Você foi deslogado em outro dispositivo!", Toast.LENGTH_SHORT).show()
+                userLoggedOutInAnotherDevice = true
+                firebaseAuth.signOut()
+            }
+            else if (user != null && userLoggedOutInAnotherDevice) {
+                //Um usuário foi autenticado em outro dispositivo, desloga o usuário desta sessão
+                //Toast.makeText(this, "Você foi logado em outro dispositivo!", Toast.LENGTH_SHORT).show()
+                userLoggedOutInAnotherDevice = true
+                FirebaseAuth.getInstance().signOut() //adiciona esta linha para desconectar o usuário
+            }
+        }
+
+
         binding.login.setOnClickListener{
             val email = binding.username.text.toString()
             val pass = binding.password.text.toString()
 
             if (email.isNotEmpty() && pass.isNotEmpty()){
-                   firebaseAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener{
-                        if (it.isSuccessful){
-                            Toast.makeText(this,"Login efetuado com sucesso!", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this,MainActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                        }else{
-                           Toast.makeText(this, "Login e senha estão incorretos", Toast.LENGTH_SHORT).show()
-                       }
+                firebaseAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener{
+                    if (it.isSuccessful){
+                        Toast.makeText(this,"Login efetuado com sucesso!", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this,MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }else{
+                        Toast.makeText(this, "Login e senha estão incorretos", Toast.LENGTH_SHORT).show()
                     }
+                }
             } else {
                 Toast.makeText(this,"Os campos deve ser preenchidos!", Toast.LENGTH_SHORT).show()
             }
@@ -77,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
 
         val usuarioAtual = FirebaseAuth.getInstance().currentUser
         if (usuarioAtual != null) {
-            //Toast.makeText(this,"Bem vindo de volta!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Bem vindo de volta!", Toast.LENGTH_SHORT).show()
             telaUser()
         } else {
             //Toast.makeText(this,"Faça login para prosseguir!", Toast.LENGTH_SHORT).show()
