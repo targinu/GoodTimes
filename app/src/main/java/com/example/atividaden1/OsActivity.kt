@@ -80,7 +80,6 @@ class OsActivity : AppCompatActivity() {
                     )
 
                     //Cria as colunas da tabela com os dados das ordens
-
                     val nomeClienteTextView = TextView(this@OsActivity)
                     nomeClienteTextView.text = nomeCliente
                     nomeClienteTextView.setPadding(8, 0, 8, 50)

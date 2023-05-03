@@ -42,7 +42,6 @@ class ComentariosActivity : AppCompatActivity() {
                 //Preenche a tabela com os dados dos clientes
                 for (comentarioSnapshot in snapshot.children) {
                     val assunto = comentarioSnapshot.child("assunto").getValue(String::class.java)
-                    val comentario = comentarioSnapshot.child("comentario").getValue(String::class.java)
 
                     //Cria uma nova linha na tabela
                     val tableRow = TableRow(this@ComentariosActivity)
@@ -57,39 +56,46 @@ class ComentariosActivity : AppCompatActivity() {
                     assuntoTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(assuntoTextView)
 
+                    //Limita o tanto de caracteres exibidos na tela
                     val comentarioTextView = TextView(this@ComentariosActivity)
-                    comentarioTextView.text = comentario
+                    val comentario = comentarioSnapshot.child("comentario").getValue(String::class.java)
+                    if (comentario != null) {
+                        if (comentario.length > 25) {
+                            comentarioTextView.text = comentario.substring(0, 25) + "..."
+                        } else {
+                            comentarioTextView.text = comentario
+                        }
+                    }
                     comentarioTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(comentarioTextView)
 
-                    /**
-                    //Exclusão do cliente do banco
-                    val excluirImageView = ImageView(this@ClientesActivity)
+                    /** acho que não é interessante ter função de exclusão aqui
+                    //Exclusão do comentario do banco
+                    val excluirImageView = ImageView(this@ComentariosActivity)
                     excluirImageView.setImageResource(R.drawable.ic_delete_foreground)
                     excluirImageView.setPadding(8, 0, 8, 50)
                     excluirImageView.setOnClickListener {
-                        //Remove o cliente correspondente no banco de dados
-                        val clienteRef = databaseRef.child(clienteSnapshot.key!!)
-                        clienteRef.removeValue()
+                        //Remove o comentario correspondente no banco de dados
+                        val comentariosRef = databaseRef.child(clienteSnapshot.key!!)
+                        comentariosRef.removeValue()
                     }
                     tableRow.addView(excluirImageView)
                     **/
 
-                    /**
-                    //Edição de clientes
+
+                    //Visualização de comentario
                     //Adiciona um OnClickListener para cada linha da tabela
                     tableRow.setOnClickListener {
                         //Cria um Intent para abrir a Activity de edição
-                        val intent = Intent(this@ClientesActivity, CadastroClienteActivity::class.java)
+                        val intent = Intent(this@ComentariosActivity, visualizarComentarioActivity::class.java)
                         //Transfere os dados do cliente para a pagina de criação para poder editar
                         val bundle = Bundle().apply {
-                            putString("nome", nome)
-                            putString("codigo", codigo)
-                            putFloat("orcamento", orcamento!!)
+                            putString("assunto", assunto)
+                            putString("comentario", comentario)
                         }
                         intent.putExtras(bundle)
                         startActivity(intent)
-                    }**/
+                    }
 
                     //Adiciona os dados na tabela
                     tableLayout.addView(tableRow)
