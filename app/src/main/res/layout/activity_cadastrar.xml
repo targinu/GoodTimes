@@ -74,7 +74,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/senha" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cadastrar"
         android:layout_width="140dp"
         android:layout_height="45dp"
