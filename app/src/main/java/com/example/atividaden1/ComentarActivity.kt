@@ -43,6 +43,7 @@ class ComentarActivity : AppCompatActivity() {
         //VOLTAR PARA A TELA ANTERIOR
         binding.btnVoltar.setOnClickListener{
             val intent = Intent(this,ComentariosActivity::class.java)
+            intent.putExtra("id", id)
             startActivity(intent)
             finish()
         }
