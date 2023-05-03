@@ -140,6 +140,7 @@ class OsActivity : AppCompatActivity() {
                         //Transfere os dados do cliente para a pagina de criação para poder editar
                         val bundle = Bundle().apply {
                             putString("nomeServico", nomeServico)
+                            putString("id",id)
                         }
                         intent.putExtras(bundle)
                         startActivity(intent)

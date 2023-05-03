@@ -48,11 +48,27 @@
             tools:layout_editor_absoluteY="48dp">
 
             <TextView
-                android:id="@+id/textViewServico"
+                android:id="@+id/textViewId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="50dp"
+                android:text="Id do serviço"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewIdDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="id" />
+
+            <TextView
+                android:id="@+id/textViewServico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
                 android:text="Serviço"
                 android:textStyle="bold" />
 
@@ -61,9 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="Serviço"
-                android:textStyle="bold" />
+                android:text="Serviço" />
 
             <ScrollView
                 android:id="@+id/scrollview"

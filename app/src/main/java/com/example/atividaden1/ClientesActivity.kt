@@ -117,6 +117,7 @@ class ClientesActivity : AppCompatActivity() {
                         }
                         intent.putExtras(bundle)
                         startActivity(intent)
+                        finish()
                     }
 
                     //Adiciona os dados na tabela

@@ -2,11 +2,11 @@ package com.example.atividaden1
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.atividaden1.databinding.ActivityComentarBinding
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.*
 
 
 class ComentarActivity : AppCompatActivity() {
@@ -19,11 +19,14 @@ class ComentarActivity : AppCompatActivity() {
         binding = ActivityComentarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val bundle = intent.extras
+        val id = bundle?.getString("id")
+
         binding.buttonSalvar.setOnClickListener {
             val assunto = binding.editTextAssunto.text.toString()
             val comentario = binding.editTextComentario.text.toString()
 
-            database = FirebaseDatabase.getInstance().getReference("ordens").child("id").child("comentarios")
+            database = FirebaseDatabase.getInstance().getReference("ordens").child(id!!).child("comentario")
             val Comentario = Comentario(assunto,comentario)
             database.child(assunto).setValue(Comentario).addOnSuccessListener {
 
