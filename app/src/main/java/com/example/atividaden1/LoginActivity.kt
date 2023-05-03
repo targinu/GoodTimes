@@ -66,18 +66,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        //Adiciona o Auth State Listener
-        authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
-            val user = firebaseAuth.currentUser
-            if (user == null && !userLoggedOutInAnotherDevice) {
-                //O usuário foi desautenticado em outro dispositivo, desloga o usuário desta sessão
-                //Toast.makeText(this, "Você foi deslogado em outro dispositivo!", Toast.LENGTH_SHORT).show()
-                userLoggedOutInAnotherDevice = true
-                firebaseAuth.signOut()
-            }
-        }
-
-
         //Ir para a pagina sobre
         binding.sobre.setOnClickListener{
             val intent = Intent(this,SobreActivity::class.java)

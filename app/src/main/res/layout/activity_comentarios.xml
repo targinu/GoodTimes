@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="voltar"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintBottom_toTopOf="@+id/textViewId"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.045"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,88 +39,108 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <TextView
+            android:id="@+id/textViewId"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="48dp">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:text="Id do serviço"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/btnVoltar" />
 
-            <TextView
-                android:id="@+id/textViewId"
+        <TextView
+            android:id="@+id/textViewIdDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="id"
+            app:layout_constraintTop_toBottomOf="@+id/textViewId" />
+
+        <TextView
+            android:id="@+id/textViewServico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:text="Serviço"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/textViewIdDesc" />
+
+        <TextView
+            android:id="@+id/textViewServicoDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Serviço"
+            app:layout_constraintTop_toBottomOf="@+id/textViewServico" />
+
+
+        <TextView
+            android:id="@+id/textViewAssunto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Assunto"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/scrollview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textViewComentario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="196dp"
+            android:text="Comentario"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/scrollview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@+id/textViewServicoDesc"
+            tools:layout_editor_absoluteX="0dp">
+
+            <TableLayout
+                android:id="@+id/tableLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="50dp"
-                android:text="Id do serviço"
-                android:textStyle="bold" />
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:stretchColumns="*">
 
-            <TextView
-                android:id="@+id/textViewIdDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="id" />
 
-            <TextView
-                android:id="@+id/textViewServico"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:text="Serviço"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textViewServicoDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Serviço" />
-
-            <ScrollView
-                android:id="@+id/scrollview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                app:layout_constraintTop_toBottomOf="@+id/textViewClientes"
-                tools:layout_editor_absoluteX="0dp">
-
-                <TableLayout
-                    android:id="@+id/tableLayout"
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="10dp"
-                    android:stretchColumns="*">
+                    android:layout_height="wrap_content">
 
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:gravity="center"
+                        android:text="Assunto"
+                        android:textSize="16sp" />
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:text="Comentario"
+                        android:textSize="16sp" />
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Assunto"
-                            android:textSize="16sp" />
+                </TableRow>
+            </TableLayout>
+        </ScrollView>
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Comentario"
-                            android:textSize="16sp" />
-
-                    </TableRow>
-                </TableLayout>
-            </ScrollView>
-
-        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

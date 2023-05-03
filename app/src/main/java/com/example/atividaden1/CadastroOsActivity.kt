@@ -190,6 +190,10 @@ class CadastroOsActivity: AppCompatActivity(){
 
             database = FirebaseDatabase.getInstance().getReference("ordens")
             val OrdemDeServico = OrdemDeServico(selectedCliente!!,nomeServico,id,preco,desconto,total)
+
+            //Chamada de função para atualizar o orçamento ||ainda não funciona
+            selectedCliente?.atualizarOrcamento(total)
+
             database.child(id).setValue(OrdemDeServico).addOnSuccessListener {
 
                 binding.editTextNomeServico.text.clear()

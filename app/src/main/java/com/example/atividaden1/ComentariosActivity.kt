@@ -31,7 +31,7 @@ class ComentariosActivity : AppCompatActivity() {
 
         //Iniciando a tabela
         val tableLayout = findViewById<TableLayout>(R.id.tableLayout)
-        val databaseRef = FirebaseDatabase.getInstance().getReference("comentarios")
+        val databaseRef = FirebaseDatabase.getInstance().getReference("ordens").child(id!!).child("comentarios")
 
         //Adiciona um listener
         databaseRef.addValueEventListener(object : ValueEventListener {

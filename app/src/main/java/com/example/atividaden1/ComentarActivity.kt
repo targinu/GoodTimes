@@ -26,7 +26,7 @@ class ComentarActivity : AppCompatActivity() {
             val assunto = binding.editTextAssunto.text.toString()
             val comentario = binding.editTextComentario.text.toString()
 
-            database = FirebaseDatabase.getInstance().getReference("ordens").child(id!!).child("comentario")
+            database = FirebaseDatabase.getInstance().getReference("ordens").child(id!!).child("comentarios")
             val Comentario = Comentario(assunto,comentario)
             database.child(assunto).setValue(Comentario).addOnSuccessListener {
 
