@@ -4,10 +4,7 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.TableLayout
-import android.widget.TableRow
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.atividaden1.databinding.ActivityComentariosBinding
 import com.google.firebase.database.*
@@ -130,6 +127,43 @@ class ComentariosActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        //Compartilhar por whatsapp
+        val shareButton = findViewById<Button>(R.id.btnCompartilhar)
+        shareButton.setOnClickListener {
+            val ordemId = binding.textViewIdDesc.text.toString()
+            val mensagem = "Olá, segue abaixo os detalhes da ordem $ordemId:\n" +
+                    "Cliente: ${binding.textViewClienteDesc.text}\n" +
+                    "Serviço: ${binding.textViewServicoDesc.text}\n" +
+                    "Valor Total: ${binding.textViewValorTotalDesc.text}\n"
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, mensagem)
+            intent.setPackage("com.whatsapp")
+            startActivity(Intent.createChooser(intent, "Compartilhar via"))
+        }
+
+        /**
+        //Compartilhar ordem pelo WhatsApp
+        binding.btnCompartilhar.setOnClickListener {
+            val id = binding.textViewIdDesc.text.toString()
+            val mensagem = "ID da ordem: $id"
+
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, mensagem)
+                type = "text/plain"
+                setPackage("com.whatsapp") // Define o pacote do WhatsApp
+            }
+
+            try {
+                startActivity(sendIntent)
+            } catch (e: Exception) {
+                // WhatsApp não está instalado ou ocorreu um erro ao compartilhar
+                Toast.makeText(this@ComentariosActivity, "Erro ao compartilhar a ordem.", Toast.LENGTH_SHORT).show()
+            }
+        }
+        **/
 
         //Cancelar ordem
         binding.btnCancelar.setOnClickListener {
