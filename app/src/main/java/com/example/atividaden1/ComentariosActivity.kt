@@ -23,12 +23,18 @@ class ComentariosActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val bundle = intent.extras
+        val nomeCliente = bundle?.getString("nomeCliente")
         val nomeServico = bundle?.getString("nomeServico")
         val id = bundle?.getString("id")
+        val total = intent.getFloatExtra("total", 0.0f)
+
 
         //Utiliza os dados para preencher os campos de edição
+        binding.textViewClienteDesc.setText(nomeCliente)
         binding.textViewServicoDesc.setText(nomeServico)
         binding.textViewIdDesc.setText(id)
+        binding.textViewValorTotalDesc.setText(total.toString())
+
 
         //Iniciando a tabela
         val tableLayout = findViewById<TableLayout>(R.id.tableLayout)

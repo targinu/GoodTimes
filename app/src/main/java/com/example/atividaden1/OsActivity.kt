@@ -175,8 +175,10 @@ class OsActivity : AppCompatActivity() {
                         val intent = Intent(this@OsActivity, ComentariosActivity::class.java)
                         //Transfere os dados do cliente para a pagina de criação para poder editar
                         val bundle = Bundle().apply {
+                            putString("nomeCliente",nomeCliente)
                             putString("nomeServico", nomeServico)
                             putString("id",id)
+                            putFloat("total", total!!)
                         }
                         intent.putExtras(bundle)
                         startActivity(intent)
