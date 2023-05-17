@@ -66,11 +66,6 @@ class OsActivity : AppCompatActivity() {
 
                 //Preenche a tabela com os dados das ordens de serviço
                 for (ordemSnapshot in snapshot.children) {
-                    val nomeCliente = ordemSnapshot.child("cliente").child("nome").getValue(String::class.java)
-                    val id = ordemSnapshot.child("id").getValue(String::class.java)
-                    val preco = ordemSnapshot.child("preco").getValue(Float::class.java)
-                    val desconto = ordemSnapshot.child("desconto").getValue(Float::class.java)
-                    val total = ordemSnapshot.child("total").getValue(Float::class.java)
 
                     //Cria uma nova linha na tabela
                     val tableRow = TableRow(this@OsActivity)
@@ -80,12 +75,20 @@ class OsActivity : AppCompatActivity() {
                     )
 
                     //Cria as colunas da tabela com os dados das ordens
+                    //Exibe o nome do Cliente na tela
                     val nomeClienteTextView = TextView(this@OsActivity)
-                    nomeClienteTextView.text = nomeCliente
+                    val nomeCliente = ordemSnapshot.child("cliente").child("nome").getValue(String::class.java)
+                    if (nomeCliente != null) {
+                        if (nomeCliente.length > 8) {
+                            nomeClienteTextView.text = nomeCliente.substring(0, 8) + "..."
+                        } else {
+                            nomeClienteTextView.text = nomeCliente
+                        }
+                    }
                     nomeClienteTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(nomeClienteTextView)
 
-
+                    //Exibe o nome do serviço na tela
                     val nomeServicoTextView = TextView(this@OsActivity)
                     val nomeServico = ordemSnapshot.child("nomeServico").getValue(String::class.java)
                     if (nomeServico != null) {
@@ -98,27 +101,62 @@ class OsActivity : AppCompatActivity() {
                     nomeServicoTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(nomeServicoTextView)
 
+                    //Exibe o ID na tela
                     val idTextView = TextView(this@OsActivity)
-                    idTextView.text = id
+                    val id = ordemSnapshot.child("id").getValue(String::class.java)
+                    if (id != null) {
+                        if (id.length > 2) {
+                            idTextView.text = id.substring(0, 2) + "..."
+                        } else {
+                            idTextView.text = id
+                        }
+                    }
                     idTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(idTextView)
 
+                    //Exibe o preço na tela
                     val precoTextView = TextView(this@OsActivity)
-                    precoTextView.text = preco?.toFloat().toString()
+                    val preco = ordemSnapshot.child("preco").getValue(Float::class.java)
+                    if (preco != null) {
+                        val precoString = preco.toString()
+                        if (precoString.length > 4) {
+                            precoTextView.text = precoString.substring(0, 4) + "."
+                        } else {
+                            precoTextView.text = precoString
+                        }
+                    }
                     precoTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(precoTextView)
 
+                    //Exibe o valor de desconto na tela
                     val descontoTextView = TextView(this@OsActivity)
-                    descontoTextView.text = desconto?.toFloat().toString()
+                    val desconto = ordemSnapshot.child("desconto").getValue(Float::class.java)
+                    if (desconto != null) {
+                        val descontoString = desconto.toString()
+                        if (descontoString.length > 4) {
+                            descontoTextView.text = descontoString.substring(0, 4) + "."
+                        } else {
+                            descontoTextView.text = descontoString
+                        }
+                    }
                     descontoTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(descontoTextView)
 
+                    //Exibe o valor total na tela
                     val totalTextView = TextView(this@OsActivity)
-                    totalTextView.text = total?.toFloat().toString()
+                    val total = ordemSnapshot.child("total").getValue(Float::class.java)
+                    if (total != null) {
+                        val totalString = total.toString()
+                        if (totalString.length > 4) {
+                            totalTextView.text = totalString.substring(0, 4) + "."
+                        } else {
+                            totalTextView.text = totalString
+                        }
+                    }
                     totalTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(totalTextView)
 
-                    /** acho que não é interessante ter essa opção
+
                     //Exclusão da ordem do banco
                     val excluirImageView = ImageView(this@OsActivity)
                     excluirImageView.setImageResource(R.drawable.ic_delete_foreground)
@@ -129,7 +167,6 @@ class OsActivity : AppCompatActivity() {
                         ordemRef.removeValue()
                     }
                     tableRow.addView(excluirImageView)
-                    **/
 
                     //Ir para tela de Comentarios
                     //Adiciona um OnClickListener para cada linha da tabela
