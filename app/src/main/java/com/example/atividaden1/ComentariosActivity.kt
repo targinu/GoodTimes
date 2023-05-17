@@ -98,6 +98,10 @@ class ComentariosActivity : AppCompatActivity() {
                         val bundle = Bundle().apply {
                             putString("assunto", assunto)
                             putString("comentario", comentario)
+                            putString("nomeCliente",nomeCliente)
+                            putString("nomeServico", nomeServico)
+                            putString("id",id)
+                            putFloat("total", total!!)
                         }
                         intent.putExtras(bundle)
                         startActivity(intent)

@@ -26,6 +26,11 @@ class visualizarComentarioActivity : AppCompatActivity() {
         val assunto = bundle?.getString("assunto")
         val comentario = bundle?.getString("comentario")
 
+        val nomeCliente = bundle?.getString("nomeCliente")
+        val nomeServico = bundle?.getString("nomeServico")
+        val id = bundle?.getString("id")
+        val total = intent.getFloatExtra("total", 0.0f)
+
         //Verifica se os dados estão vazios
         if (assunto.isNullOrEmpty() || comentario.isNullOrEmpty()) {
             Log.e("VisualizarComentario", "Dados inválidos passados para a atividade atual")
@@ -41,6 +46,10 @@ class visualizarComentarioActivity : AppCompatActivity() {
             val intent = Intent(this,ComentariosActivity::class.java)
             intent.putExtra("assunto", assunto)
             intent.putExtra("comentario", comentario)
+            intent.putExtra("nomeCliente", nomeCliente)
+            intent.putExtra("nomeServico", nomeServico)
+            intent.putExtra("id", id)
+            intent.putExtra("total", total!!)
             startActivity(intent)
             finish()
         }
