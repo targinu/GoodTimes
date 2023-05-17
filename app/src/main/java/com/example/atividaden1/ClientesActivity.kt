@@ -58,7 +58,7 @@ class ClientesActivity : AppCompatActivity() {
             }
         })
 
-        //Adiciona um listener
+        //Adiciona um listener que exibe os dados na tela
         databaseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 //Limpa as linhas da tabela
@@ -66,9 +66,6 @@ class ClientesActivity : AppCompatActivity() {
 
                 //Preenche a tabela com os dados dos clientes
                 for (clienteSnapshot in snapshot.children) {
-                    val nome = clienteSnapshot.child("nome").getValue(String::class.java)
-                    val codigo = clienteSnapshot.child("codigo").getValue(String::class.java)
-                    val orcamento = clienteSnapshot.child("orcamento").getValue(Float::class.java)
 
                     //Cria uma nova linha na tabela
                     val tableRow = TableRow(this@ClientesActivity)
@@ -78,18 +75,42 @@ class ClientesActivity : AppCompatActivity() {
                     )
 
                     //Cria as colunas da tabela com os dados dos clientes
+
+                    //Exibe o nome do Cliente na tela
                     val nomeTextView = TextView(this@ClientesActivity)
-                    nomeTextView.text = nome
+                    val nome = clienteSnapshot.child("nome").getValue(String::class.java)
+                    if (nome != null) {
+                        if (nome.length > 10) {
+                            nomeTextView.text = nome.substring(0, 10) + "..."
+                        } else {
+                            nomeTextView.text = nome
+                        }
+                    }
                     nomeTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(nomeTextView)
 
                     val codigoTextView = TextView(this@ClientesActivity)
-                    codigoTextView.text = codigo
+                    val codigo = clienteSnapshot.child("codigo").getValue(String::class.java)
+                    if (codigo != null) {
+                        if (codigo.length > 2) {
+                            codigoTextView.text = codigo.substring(0, 2) + "..."
+                        } else {
+                            codigoTextView.text = codigo
+                        }
+                    }
                     codigoTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(codigoTextView)
 
                     val orcamentoTextView = TextView(this@ClientesActivity)
-                    orcamentoTextView.text = orcamento?.toFloat().toString()
+                    val orcamento = clienteSnapshot.child("orcamento").getValue(Float::class.java)
+                    if (orcamento != null) {
+                        val orcamentoString = orcamento.toString()
+                        if (orcamentoString.length > 7) {
+                            orcamentoTextView.text = orcamentoString.substring(0, 7) + "..."
+                        } else {
+                            orcamentoTextView.text = orcamentoString
+                        }
+                    }
                     orcamentoTextView.setPadding(8, 0, 8, 50)
                     tableRow.addView(orcamentoTextView)
 
