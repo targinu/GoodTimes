@@ -182,48 +182,86 @@ class CadastroOsActivity: AppCompatActivity(){
 
         //Salvar Ordem de Serviço no banco
         binding.buttonSalvar.setOnClickListener {
-            val nomeServico = binding.editTextNomeServico.text.toString()
             val id = binding.editTextId.text.toString()
-            val preco = binding.editTextPreco.text.toString().toFloat()
-            val desconto = binding.editTextDesconto.text.toString().toFloat()
-            val total = binding.textViewValorTotal.text.toString().toFloat()
 
-            // Verifica se há um cliente selecionado
-            if (selectedCliente != null) {
-                database = FirebaseDatabase.getInstance().getReference("ordens")
-                val ordemDeServico = OrdemDeServico(selectedCliente!!,nomeServico,id,preco,desconto,total)
-
-                //Salva a ordem de serviço com status "encerrada = false" e "cancelada = false"
-                ordemDeServico.encerrada = false
-                ordemDeServico.cancelada = false
-
-                database.child(id).setValue(ordemDeServico).addOnSuccessListener {
-
-                    // Atualiza o orçamento do cliente selecionado
-                    selectedCliente?.let { cliente ->
-                        val orcamentoAtualizado = cliente.orcamento?.minus(total)
-                        cliente.orcamento = orcamentoAtualizado
-                        val clientesRef = FirebaseDatabase.getInstance().getReference("clientes")
-                        clientesRef.child(cliente.codigo.toString()).setValue(cliente).addOnSuccessListener {
-                            //Toast.makeText(this, "Ordem cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
-                        }.addOnFailureListener {
-                            Toast.makeText(this, "Falha ao atualizar orçamento do cliente!", Toast.LENGTH_SHORT).show()
-                        }
+            // Verifica se o ID já está em uso por uma ordem aberta
+            val ordensRef = FirebaseDatabase.getInstance().getReference("ordens")
+            ordensRef.orderByChild("id").equalTo(id).addListenerForSingleValueEvent(object :
+                ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val ordensAbertas = snapshot.children.count { child ->
+                        val cancelada = child.child("cancelada").getValue(Boolean::class.java) ?: false
+                        val encerrada = child.child("encerrada").getValue(Boolean::class.java) ?: false
+                        !cancelada && !encerrada
                     }
 
-                    binding.editTextNomeServico.text.clear()
-                    binding.editTextId.text.clear()
-                    binding.editTextPreco.text.clear()
-                    binding.editTextDesconto.text.clear()
+                    if (ordensAbertas > 0) {
+                        Toast.makeText(
+                            this@CadastroOsActivity,
+                            "Já existe uma ordem aberta com o mesmo ID.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        // Continue com o processo de salvar a ordem
+                        val nomeServico = binding.editTextNomeServico.text.toString()
+                        val preco = binding.editTextPreco.text.toString().toFloat()
+                        val desconto = binding.editTextDesconto.text.toString().toFloat()
+                        val total = binding.textViewValorTotal.text.toString().toFloat()
 
-                    Toast.makeText(this,"Ordem cadastrada com sucesso!",Toast.LENGTH_SHORT).show()
+                        // Verifica se há um cliente selecionado
+                        if (selectedCliente != null) {
+                            database = FirebaseDatabase.getInstance().getReference("ordens")
+                            val ordemDeServico =
+                                OrdemDeServico(selectedCliente!!, nomeServico, id, preco, desconto, total)
 
-                }.addOnFailureListener{
-                    Toast.makeText(this,"Falha ao cadastrar ordem!",Toast.LENGTH_SHORT).show()
+                            // Salva a ordem de serviço com status "encerrada = false" e "cancelada = false"
+                            ordemDeServico.encerrada = false
+                            ordemDeServico.cancelada = false
+
+                            database.child(id).setValue(ordemDeServico).addOnSuccessListener {
+
+                                // Atualiza o orçamento do cliente selecionado
+                                selectedCliente?.let { cliente ->
+                                    val orcamentoAtualizado =
+                                        cliente.orcamento?.minus(total)
+                                    cliente.orcamento = orcamentoAtualizado
+                                    val clientesRef =
+                                        FirebaseDatabase.getInstance().getReference("clientes")
+                                    clientesRef.child(cliente.codigo.toString())
+                                        .setValue(cliente).addOnSuccessListener {
+                                            Toast.makeText(this@CadastroOsActivity,"Ordem cadastrada com sucesso!",Toast.LENGTH_SHORT).show()
+                                        }.addOnFailureListener {
+                                            Toast.makeText(this@CadastroOsActivity, "Erro ao atualizar o orçamento do cliente.", Toast.LENGTH_SHORT).show()
+                                        }
+                                }
+
+                                // Limpa os campos de entrada de dados
+                                binding.editTextNomeServico.text.clear()
+                                binding.editTextId.text.clear()
+                                binding.editTextPreco.text.clear()
+                                binding.editTextDesconto.text.clear()
+                                binding.textViewValorTotal.text = "0.00"
+                            }.addOnFailureListener {
+                                Toast.makeText(this@CadastroOsActivity, "Erro ao cadastrar a ordem de serviço.", Toast.LENGTH_SHORT).show()
+                            }
+                        } else {
+                            Toast.makeText(
+                                this@CadastroOsActivity,
+                                "Selecione um cliente.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
                 }
-            } else {
-                Toast.makeText(this,"Nenhum cliente selecionado!",Toast.LENGTH_SHORT).show()
-            }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(
+                        this@CadastroOsActivity,
+                        "Falha ao verificar ordens abertas.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
         }
 
         //Voltar para ordem de serviço
