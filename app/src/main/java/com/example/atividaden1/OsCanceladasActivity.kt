@@ -4,22 +4,22 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.atividaden1.databinding.ActivityOsBinding
 import android.util.Log
 import android.view.View
 import android.widget.*
+import com.example.atividaden1.databinding.ActivityOsCanceladasBinding
 import com.google.firebase.database.*
 
-class OsActivity : AppCompatActivity() {
+class OsCanceladasActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityOsBinding
+    private lateinit var binding: ActivityOsCanceladasBinding
     private lateinit var database: FirebaseDatabase
     private lateinit var ordemRef: DatabaseReference
     private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityOsBinding.inflate(layoutInflater)
+        binding = ActivityOsCanceladasBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //Iniciando a tabela
@@ -35,20 +35,20 @@ class OsActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText.isNullOrEmpty()) {
-                    //Exibe todos os itens
+                    // Exibe todos os itens
                     for (i in 0 until tableLayout.childCount) {
                         val row = tableLayout.getChildAt(i) as TableRow
                         row.visibility = View.VISIBLE
                     }
                 } else {
-                    //Filtra os itens
+                    // Filtra os itens
                     for (i in 0 until tableLayout.childCount) {
                         val row = tableLayout.getChildAt(i) as TableRow
                         val cliente = (row.getChildAt(0) as TextView).text.toString()
                         val servico = (row.getChildAt(1) as TextView).text.toString()
                         val id = (row.getChildAt(2) as TextView).text.toString()
 
-                        if (!cliente.contains(newText, true) && !servico.contains(newText, true) && !id.contains(newText, true)){
+                        if (!cliente.contains(newText, true) && !servico.contains(newText, true) && !id.contains(newText, true)) {
                             row.visibility = View.GONE
                         } else {
                             row.visibility = View.VISIBLE
@@ -67,23 +67,21 @@ class OsActivity : AppCompatActivity() {
 
                 //Preenche a tabela com os dados das ordens de serviço
                 for (ordemSnapshot in snapshot.children) {
-
                     val encerrada = ordemSnapshot.child("encerrada").getValue(Boolean::class.java)
                     val cancelada = ordemSnapshot.child("cancelada").getValue(Boolean::class.java)
 
-                    //A ordem de serviço não está encerrada nem cancelada, então a exibe na tabela
-                    if (encerrada != true && cancelada != true) {
-
-                        //Cria uma nova linha na tabela
-                        val tableRow = TableRow(this@OsActivity)
+                    //A ordem de serviço está cancelada, então a exibe na tabela
+                    if (cancelada == true) {
+                        // Cria uma nova linha na tabela
+                        val tableRow = TableRow(this@OsCanceladasActivity)
                         tableRow.layoutParams = TableLayout.LayoutParams(
                             TableLayout.LayoutParams.MATCH_PARENT,
                             TableLayout.LayoutParams.WRAP_CONTENT
                         )
 
-                        //Cria as colunas da tabela com os dados das ordens
+                        //Exibe os dados na tabela
                         //Exibe o nome do Cliente na tela
-                        val nomeClienteTextView = TextView(this@OsActivity)
+                        val nomeClienteTextView = TextView(this@OsCanceladasActivity)
                         val nomeCliente = ordemSnapshot.child("cliente").child("nome")
                             .getValue(String::class.java)
                         if (nomeCliente != null) {
@@ -97,7 +95,7 @@ class OsActivity : AppCompatActivity() {
                         tableRow.addView(nomeClienteTextView)
 
                         //Exibe o nome do serviço na tela
-                        val nomeServicoTextView = TextView(this@OsActivity)
+                        val nomeServicoTextView = TextView(this@OsCanceladasActivity)
                         val nomeServico =
                             ordemSnapshot.child("nomeServico").getValue(String::class.java)
                         if (nomeServico != null) {
@@ -111,7 +109,7 @@ class OsActivity : AppCompatActivity() {
                         tableRow.addView(nomeServicoTextView)
 
                         //Exibe o ID na tela
-                        val idTextView = TextView(this@OsActivity)
+                        val idTextView = TextView(this@OsCanceladasActivity)
                         val id = ordemSnapshot.child("id").getValue(String::class.java)
                         if (id != null) {
                             if (id.length > 2) {
@@ -124,7 +122,7 @@ class OsActivity : AppCompatActivity() {
                         tableRow.addView(idTextView)
 
                         //Exibe o preço na tela
-                        val precoTextView = TextView(this@OsActivity)
+                        val precoTextView = TextView(this@OsCanceladasActivity)
                         val preco = ordemSnapshot.child("preco").getValue(Float::class.java)
                         if (preco != null) {
                             val precoString = preco.toString()
@@ -138,7 +136,7 @@ class OsActivity : AppCompatActivity() {
                         tableRow.addView(precoTextView)
 
                         //Exibe o valor de desconto na tela
-                        val descontoTextView = TextView(this@OsActivity)
+                        val descontoTextView = TextView(this@OsCanceladasActivity)
                         val desconto = ordemSnapshot.child("desconto").getValue(Float::class.java)
                         if (desconto != null) {
                             val descontoString = desconto.toString()
@@ -152,7 +150,7 @@ class OsActivity : AppCompatActivity() {
                         tableRow.addView(descontoTextView)
 
                         //Exibe o valor total na tela
-                        val totalTextView = TextView(this@OsActivity)
+                        val totalTextView = TextView(this@OsCanceladasActivity)
                         val total = ordemSnapshot.child("total").getValue(Float::class.java)
                         if (total != null) {
                             val totalString = total.toString()
@@ -165,24 +163,11 @@ class OsActivity : AppCompatActivity() {
                         totalTextView.setPadding(8, 0, 8, 50)
                         tableRow.addView(totalTextView)
 
-                        /** Não é necessario excluir ordens
-                        //Exclusão da ordem do banco
-                        val excluirImageView = ImageView(this@OsActivity)
-                        excluirImageView.setImageResource(R.drawable.ic_delete_foreground)
-                        excluirImageView.setPadding(8, 0, 8, 50)
-                        excluirImageView.setOnClickListener {
-                        //Remove a ordem correspondente no banco de dados
-                        val ordemRef = databaseRef.child(ordemSnapshot.key!!)
-                        ordemRef.removeValue()
-                        }
-                        tableRow.addView(excluirImageView)
-                         **/
-
                         //Ir para tela de Comentarios
                         //Adiciona um OnClickListener para cada linha da tabela
                         tableRow.setOnClickListener {
                             //Cria um Intent para abrir a Activity de edição
-                            val intent = Intent(this@OsActivity, ComentariosActivity::class.java)
+                            val intent = Intent(this@OsCanceladasActivity, ComentariosActivity::class.java)
                             //Transfere os dados do cliente para a pagina de criação para poder editar
                             val bundle = Bundle().apply {
                                 putString("nomeCliente", nomeCliente)
@@ -195,40 +180,20 @@ class OsActivity : AppCompatActivity() {
                             finish()
                         }
 
-                        //Adiciona os dados na tabela
+                        //Adiciona a nova linha na tabela
                         tableLayout.addView(tableRow)
                     }
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
                 Log.d(TAG, "Falha ao carregar ordens de serviço.", error.toException())
             }
         })
 
-        //Ir para a tela de visualização de ordens canceladas
-        binding.btnCanceladas.setOnClickListener{
-            val intent = Intent(this,OsCanceladasActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        //Ir para a tela de visualização de ordens canceladas
-        binding.btnEncerradas.setOnClickListener{
-            val intent = Intent(this,OsEncerradasActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        //Ir para a tela de cadastro de Ordem de serviço
-        binding.btnCadastrarOs.setOnClickListener{
-            val intent = Intent(this,CadastroOsActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        //VOLTAR PARA A TELA INICIAL
+        //VOLTAR PARA A TELA ANTERIOR
         binding.btnVoltar.setOnClickListener{
-            val intent = Intent(this,MainActivity::class.java)
+            val intent = Intent(this,OsActivity::class.java)
             startActivity(intent)
             finish()
         }

@@ -35,6 +35,8 @@
         <activity android:name=".SobreActivity"/>
         <activity android:name=".ComentariosActivity"/>
         <activity android:name=".visualizarComentarioActivity"/>
+        <activity android:name=".OsCanceladasActivity" />
+        <activity android:name=".OsEncerradasActivity" />
     </application>
 
 </manifest>

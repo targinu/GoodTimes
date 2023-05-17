@@ -12,73 +12,32 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OsActivity">
+    tools:context=".OsCanceladasActivity">
 
     <SearchView
         android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:iconifiedByDefault="false"
         android:queryHint="Pesquisar ordem"
-        app:layout_constraintBottom_toTopOf="@+id/textViewClientes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEncerradas" />
+        app:layout_constraintTop_toBottomOf="@+id/btnVoltar" />
 
     <TextView
         android:id="@+id/textViewClientes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Ordem de Serviço"
+        android:text="Ordens Canceladas"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_view" />
-
-    <Button
-        android:id="@+id/btnCadastrarOs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cadastrar OS"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/btnCanceladas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Visualizar Canceladas"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCadastrarOs"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="TextSizeCheck" />
-
-    <Button
-        android:id="@+id/btnEncerradas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Visualizar Encerradas"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/btnCanceladas"
-        app:layout_constraintTop_toBottomOf="@+id/btnCadastrarOs"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="TextSizeCheck" />
 
     <TextView
         android:id="@+id/btnVoltar"

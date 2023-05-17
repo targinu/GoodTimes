@@ -184,43 +184,39 @@ class CadastroOsActivity: AppCompatActivity(){
         binding.buttonSalvar.setOnClickListener {
             val id = binding.editTextId.text.toString()
 
-            // Verifica se o ID já está em uso por uma ordem aberta
+            //Verifica se o ID já está em uso por uma ordem aberta ou cancelada
             val ordensRef = FirebaseDatabase.getInstance().getReference("ordens")
             ordensRef.orderByChild("id").equalTo(id).addListenerForSingleValueEvent(object :
                 ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val ordensAbertas = snapshot.children.count { child ->
-                        val cancelada = child.child("cancelada").getValue(Boolean::class.java) ?: false
-                        val encerrada = child.child("encerrada").getValue(Boolean::class.java) ?: false
-                        !cancelada && !encerrada
-                    }
+                    val ordensExistem = snapshot.exists()
 
-                    if (ordensAbertas > 0) {
+                    if (ordensExistem) {
                         Toast.makeText(
                             this@CadastroOsActivity,
-                            "Já existe uma ordem aberta com o mesmo ID.",
+                            "Já existe uma ordem com o mesmo ID.",
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
-                        // Continue com o processo de salvar a ordem
+                        //Continua com o processo de salvar a ordem
                         val nomeServico = binding.editTextNomeServico.text.toString()
                         val preco = binding.editTextPreco.text.toString().toFloat()
                         val desconto = binding.editTextDesconto.text.toString().toFloat()
                         val total = binding.textViewValorTotal.text.toString().toFloat()
 
-                        // Verifica se há um cliente selecionado
+                        //Verifica se há um cliente selecionado
                         if (selectedCliente != null) {
                             database = FirebaseDatabase.getInstance().getReference("ordens")
                             val ordemDeServico =
                                 OrdemDeServico(selectedCliente!!, nomeServico, id, preco, desconto, total)
 
-                            // Salva a ordem de serviço com status "encerrada = false" e "cancelada = false"
+                            //Salva a ordem de serviço com status "encerrada = false" e "cancelada = false"
                             ordemDeServico.encerrada = false
                             ordemDeServico.cancelada = false
 
                             database.child(id).setValue(ordemDeServico).addOnSuccessListener {
 
-                                // Atualiza o orçamento do cliente selecionado
+                                //Atualiza o orçamento do cliente selecionado
                                 selectedCliente?.let { cliente ->
                                     val orcamentoAtualizado =
                                         cliente.orcamento?.minus(total)
@@ -235,7 +231,7 @@ class CadastroOsActivity: AppCompatActivity(){
                                         }
                                 }
 
-                                // Limpa os campos de entrada de dados
+                                //Limpa os campos de entrada de dados
                                 binding.editTextNomeServico.text.clear()
                                 binding.editTextId.text.clear()
                                 binding.editTextPreco.text.clear()
@@ -257,7 +253,7 @@ class CadastroOsActivity: AppCompatActivity(){
                 override fun onCancelled(error: DatabaseError) {
                     Toast.makeText(
                         this@CadastroOsActivity,
-                        "Falha ao verificar ordens abertas.",
+                        "Falha ao verificar a existência de ordens.",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

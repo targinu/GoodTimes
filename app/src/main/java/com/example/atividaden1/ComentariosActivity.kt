@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.atividaden1.databinding.ActivityComentariosBinding
 import com.google.firebase.database.*
+import java.util.*
 
 class ComentariosActivity : AppCompatActivity() {
 
@@ -150,6 +151,7 @@ class ComentariosActivity : AppCompatActivity() {
             }
         }
 
+
         //Encerrar ordem
         binding.btnEncerrar.setOnClickListener {
             val id = binding.textViewIdDesc.text.toString()
@@ -176,6 +178,8 @@ class ComentariosActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
     }
+
+
+
 }
