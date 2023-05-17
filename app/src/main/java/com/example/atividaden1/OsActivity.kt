@@ -67,126 +67,136 @@ class OsActivity : AppCompatActivity() {
                 //Preenche a tabela com os dados das ordens de serviço
                 for (ordemSnapshot in snapshot.children) {
 
-                    //Cria uma nova linha na tabela
-                    val tableRow = TableRow(this@OsActivity)
-                    tableRow.layoutParams = TableLayout.LayoutParams(
-                        TableLayout.LayoutParams.MATCH_PARENT,
-                        TableLayout.LayoutParams.WRAP_CONTENT
-                    )
+                    val encerrada = ordemSnapshot.child("encerrada").getValue(Boolean::class.java)
+                    val cancelada = ordemSnapshot.child("cancelada").getValue(Boolean::class.java)
 
-                    //Cria as colunas da tabela com os dados das ordens
-                    //Exibe o nome do Cliente na tela
-                    val nomeClienteTextView = TextView(this@OsActivity)
-                    val nomeCliente = ordemSnapshot.child("cliente").child("nome").getValue(String::class.java)
-                    if (nomeCliente != null) {
-                        if (nomeCliente.length > 8) {
-                            nomeClienteTextView.text = nomeCliente.substring(0, 8) + "..."
-                        } else {
-                            nomeClienteTextView.text = nomeCliente
+                    //A ordem de serviço não está encerrada nem cancelada, então a exibe na tabela
+                    if (encerrada != true && cancelada != true) {
+
+                        //Cria uma nova linha na tabela
+                        val tableRow = TableRow(this@OsActivity)
+                        tableRow.layoutParams = TableLayout.LayoutParams(
+                            TableLayout.LayoutParams.MATCH_PARENT,
+                            TableLayout.LayoutParams.WRAP_CONTENT
+                        )
+
+                        //Cria as colunas da tabela com os dados das ordens
+                        //Exibe o nome do Cliente na tela
+                        val nomeClienteTextView = TextView(this@OsActivity)
+                        val nomeCliente = ordemSnapshot.child("cliente").child("nome")
+                            .getValue(String::class.java)
+                        if (nomeCliente != null) {
+                            if (nomeCliente.length > 8) {
+                                nomeClienteTextView.text = nomeCliente.substring(0, 8) + "..."
+                            } else {
+                                nomeClienteTextView.text = nomeCliente
+                            }
                         }
-                    }
-                    nomeClienteTextView.setPadding(8, 0, 8, 50)
-                    tableRow.addView(nomeClienteTextView)
+                        nomeClienteTextView.setPadding(8, 0, 8, 50)
+                        tableRow.addView(nomeClienteTextView)
 
-                    //Exibe o nome do serviço na tela
-                    val nomeServicoTextView = TextView(this@OsActivity)
-                    val nomeServico = ordemSnapshot.child("nomeServico").getValue(String::class.java)
-                    if (nomeServico != null) {
-                        if (nomeServico.length > 10) {
-                            nomeServicoTextView.text = nomeServico.substring(0, 10) + "..."
-                        } else {
-                            nomeServicoTextView.text = nomeServico
+                        //Exibe o nome do serviço na tela
+                        val nomeServicoTextView = TextView(this@OsActivity)
+                        val nomeServico =
+                            ordemSnapshot.child("nomeServico").getValue(String::class.java)
+                        if (nomeServico != null) {
+                            if (nomeServico.length > 10) {
+                                nomeServicoTextView.text = nomeServico.substring(0, 10) + "..."
+                            } else {
+                                nomeServicoTextView.text = nomeServico
+                            }
                         }
-                    }
-                    nomeServicoTextView.setPadding(8, 0, 8, 50)
-                    tableRow.addView(nomeServicoTextView)
+                        nomeServicoTextView.setPadding(8, 0, 8, 50)
+                        tableRow.addView(nomeServicoTextView)
 
-                    //Exibe o ID na tela
-                    val idTextView = TextView(this@OsActivity)
-                    val id = ordemSnapshot.child("id").getValue(String::class.java)
-                    if (id != null) {
-                        if (id.length > 2) {
-                            idTextView.text = id.substring(0, 2) + "..."
-                        } else {
-                            idTextView.text = id
+                        //Exibe o ID na tela
+                        val idTextView = TextView(this@OsActivity)
+                        val id = ordemSnapshot.child("id").getValue(String::class.java)
+                        if (id != null) {
+                            if (id.length > 2) {
+                                idTextView.text = id.substring(0, 2) + "..."
+                            } else {
+                                idTextView.text = id
+                            }
                         }
-                    }
-                    idTextView.setPadding(8, 0, 8, 50)
-                    tableRow.addView(idTextView)
+                        idTextView.setPadding(8, 0, 8, 50)
+                        tableRow.addView(idTextView)
 
-                    //Exibe o preço na tela
-                    val precoTextView = TextView(this@OsActivity)
-                    val preco = ordemSnapshot.child("preco").getValue(Float::class.java)
-                    if (preco != null) {
-                        val precoString = preco.toString()
-                        if (precoString.length > 4) {
-                            precoTextView.text = precoString.substring(0, 4) + "."
-                        } else {
-                            precoTextView.text = precoString
+                        //Exibe o preço na tela
+                        val precoTextView = TextView(this@OsActivity)
+                        val preco = ordemSnapshot.child("preco").getValue(Float::class.java)
+                        if (preco != null) {
+                            val precoString = preco.toString()
+                            if (precoString.length > 4) {
+                                precoTextView.text = precoString.substring(0, 4) + "."
+                            } else {
+                                precoTextView.text = precoString
+                            }
                         }
-                    }
-                    precoTextView.setPadding(8, 0, 8, 50)
-                    tableRow.addView(precoTextView)
+                        precoTextView.setPadding(8, 0, 8, 50)
+                        tableRow.addView(precoTextView)
 
-                    //Exibe o valor de desconto na tela
-                    val descontoTextView = TextView(this@OsActivity)
-                    val desconto = ordemSnapshot.child("desconto").getValue(Float::class.java)
-                    if (desconto != null) {
-                        val descontoString = desconto.toString()
-                        if (descontoString.length > 4) {
-                            descontoTextView.text = descontoString.substring(0, 4) + "."
-                        } else {
-                            descontoTextView.text = descontoString
+                        //Exibe o valor de desconto na tela
+                        val descontoTextView = TextView(this@OsActivity)
+                        val desconto = ordemSnapshot.child("desconto").getValue(Float::class.java)
+                        if (desconto != null) {
+                            val descontoString = desconto.toString()
+                            if (descontoString.length > 4) {
+                                descontoTextView.text = descontoString.substring(0, 4) + "."
+                            } else {
+                                descontoTextView.text = descontoString
+                            }
                         }
-                    }
-                    descontoTextView.setPadding(8, 0, 8, 50)
-                    tableRow.addView(descontoTextView)
+                        descontoTextView.setPadding(8, 0, 8, 50)
+                        tableRow.addView(descontoTextView)
 
-                    //Exibe o valor total na tela
-                    val totalTextView = TextView(this@OsActivity)
-                    val total = ordemSnapshot.child("total").getValue(Float::class.java)
-                    if (total != null) {
-                        val totalString = total.toString()
-                        if (totalString.length > 4) {
-                            totalTextView.text = totalString.substring(0, 4) + "."
-                        } else {
-                            totalTextView.text = totalString
+                        //Exibe o valor total na tela
+                        val totalTextView = TextView(this@OsActivity)
+                        val total = ordemSnapshot.child("total").getValue(Float::class.java)
+                        if (total != null) {
+                            val totalString = total.toString()
+                            if (totalString.length > 4) {
+                                totalTextView.text = totalString.substring(0, 4) + "."
+                            } else {
+                                totalTextView.text = totalString
+                            }
                         }
-                    }
-                    totalTextView.setPadding(8, 0, 8, 50)
-                    tableRow.addView(totalTextView)
+                        totalTextView.setPadding(8, 0, 8, 50)
+                        tableRow.addView(totalTextView)
 
-
-                    //Exclusão da ordem do banco
-                    val excluirImageView = ImageView(this@OsActivity)
-                    excluirImageView.setImageResource(R.drawable.ic_delete_foreground)
-                    excluirImageView.setPadding(8, 0, 8, 50)
-                    excluirImageView.setOnClickListener {
+                        /** Não é necessario excluir ordens
+                        //Exclusão da ordem do banco
+                        val excluirImageView = ImageView(this@OsActivity)
+                        excluirImageView.setImageResource(R.drawable.ic_delete_foreground)
+                        excluirImageView.setPadding(8, 0, 8, 50)
+                        excluirImageView.setOnClickListener {
                         //Remove a ordem correspondente no banco de dados
                         val ordemRef = databaseRef.child(ordemSnapshot.key!!)
                         ordemRef.removeValue()
-                    }
-                    tableRow.addView(excluirImageView)
-
-                    //Ir para tela de Comentarios
-                    //Adiciona um OnClickListener para cada linha da tabela
-                    tableRow.setOnClickListener {
-                        //Cria um Intent para abrir a Activity de edição
-                        val intent = Intent(this@OsActivity, ComentariosActivity::class.java)
-                        //Transfere os dados do cliente para a pagina de criação para poder editar
-                        val bundle = Bundle().apply {
-                            putString("nomeCliente",nomeCliente)
-                            putString("nomeServico", nomeServico)
-                            putString("id",id)
-                            putFloat("total", total!!)
                         }
-                        intent.putExtras(bundle)
-                        startActivity(intent)
-                        finish()
-                    }
+                        tableRow.addView(excluirImageView)
+                         **/
 
-                    //Adiciona os dados na tabela
-                    tableLayout.addView(tableRow)
+                        //Ir para tela de Comentarios
+                        //Adiciona um OnClickListener para cada linha da tabela
+                        tableRow.setOnClickListener {
+                            //Cria um Intent para abrir a Activity de edição
+                            val intent = Intent(this@OsActivity, ComentariosActivity::class.java)
+                            //Transfere os dados do cliente para a pagina de criação para poder editar
+                            val bundle = Bundle().apply {
+                                putString("nomeCliente", nomeCliente)
+                                putString("nomeServico", nomeServico)
+                                putString("id", id)
+                                putFloat("total", total!!)
+                            }
+                            intent.putExtras(bundle)
+                            startActivity(intent)
+                            finish()
+                        }
+
+                        //Adiciona os dados na tabela
+                        tableLayout.addView(tableRow)
+                    }
                 }
             }
             override fun onCancelled(error: DatabaseError) {

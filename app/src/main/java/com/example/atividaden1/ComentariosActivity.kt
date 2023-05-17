@@ -130,13 +130,44 @@ class ComentariosActivity : AppCompatActivity() {
             finish()
         }
 
-        // Encerrar ordem
+        //Cancelar ordem
+        binding.btnCancelar.setOnClickListener {
+            val id = binding.textViewIdDesc.text.toString()
+            val ordensRef = FirebaseDatabase.getInstance().getReference("ordens").child(id)
+
+            //Verifica se a ordem já foi encerrada
+            ordensRef.child("encerrada").get().addOnSuccessListener { encerradaSnapshot ->
+                val encerrada = encerradaSnapshot.getValue(Boolean::class.java)
+                if (encerrada != true) {
+                    //A ordem não está encerrada, então pode ser cancelada
+                    ordensRef.child("cancelada").setValue(true)
+                    Toast.makeText(this@ComentariosActivity, "Ordem cancelada.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@ComentariosActivity, "Não é possível cancelar uma ordem já encerrada.", Toast.LENGTH_SHORT).show()
+                }
+            }.addOnFailureListener {
+                Toast.makeText(this@ComentariosActivity, "Falha ao cancelar ordem.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        //Encerrar ordem
         binding.btnEncerrar.setOnClickListener {
             val id = binding.textViewIdDesc.text.toString()
             val ordensRef = FirebaseDatabase.getInstance().getReference("ordens").child(id)
-            ordensRef.child("encerrada").setValue(true)
 
-            Toast.makeText(this@ComentariosActivity, "Ordem encerrada.", Toast.LENGTH_SHORT).show()
+            //Verifica se a ordem já foi cancelada
+            ordensRef.child("cancelada").get().addOnSuccessListener { canceladaSnapshot ->
+                val cancelada = canceladaSnapshot.getValue(Boolean::class.java)
+                if (cancelada != true) {
+                    //A ordem não está cancelada, então pode ser encerrada
+                    ordensRef.child("encerrada").setValue(true)
+                    Toast.makeText(this@ComentariosActivity, "Ordem encerrada.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@ComentariosActivity, "Não é possível encerrar uma ordem já cancelada.", Toast.LENGTH_SHORT).show()
+                }
+            }.addOnFailureListener {
+                Toast.makeText(this@ComentariosActivity, "Falha ao encerrar ordem.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         //VOLTAR PARA A TELA ANTERIOR

@@ -193,11 +193,9 @@ class CadastroOsActivity: AppCompatActivity(){
                 database = FirebaseDatabase.getInstance().getReference("ordens")
                 val ordemDeServico = OrdemDeServico(selectedCliente!!,nomeServico,id,preco,desconto,total)
 
-                //Chamada de função para atualizar o orçamento
-                selectedCliente?.atualizarOrcamento(total)
-
-                // Salva a ordem de serviço com status "encerrada = false"
+                //Salva a ordem de serviço com status "encerrada = false" e "cancelada = false"
                 ordemDeServico.encerrada = false
+                ordemDeServico.cancelada = false
 
                 database.child(id).setValue(ordemDeServico).addOnSuccessListener {
 
