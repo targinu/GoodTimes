@@ -120,7 +120,10 @@ class ComentariosActivity : AppCompatActivity() {
         binding.btnCadastrarComentario.setOnClickListener{
             val intent = Intent(this,ComentarActivity::class.java)
             val bundle = Bundle().apply {
+                putString("nomeCliente",nomeCliente)
+                putString("nomeServico", nomeServico)
                 putString("id",id)
+                putFloat("total", total!!)
             }
             intent.putExtras(bundle)
             startActivity(intent)
