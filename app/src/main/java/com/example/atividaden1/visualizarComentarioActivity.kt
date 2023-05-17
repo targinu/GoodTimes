@@ -2,9 +2,11 @@ package com.example.atividaden1
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.atividaden1.databinding.ActivityVisualizarComentarioBinding
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.*
+
 
 class visualizarComentarioActivity : AppCompatActivity() {
 
@@ -16,9 +18,19 @@ class visualizarComentarioActivity : AppCompatActivity() {
         binding = ActivityVisualizarComentarioBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Inicializa a referência do banco de dados Firebase
+        databaseRef = FirebaseDatabase.getInstance().reference
+
+        //Obtém o "assunto" e "comentario" da activity anterior
         val bundle = intent.extras
         val assunto = bundle?.getString("assunto")
         val comentario = bundle?.getString("comentario")
+
+        //Verifica se os dados estão vazios
+        if (assunto.isNullOrEmpty() || comentario.isNullOrEmpty()) {
+            Log.e("VisualizarComentario", "Dados inválidos passados para a atividade atual")
+            return
+        }
 
         //Utiliza os dados para preencher os campos de edição
         binding.textViewAssuntoDesc.setText(assunto)
@@ -27,12 +39,30 @@ class visualizarComentarioActivity : AppCompatActivity() {
         //VOLTAR PARA A TELA ANTERIOR
         binding.btnVoltar.setOnClickListener{
             val intent = Intent(this,ComentariosActivity::class.java)
-            /**Não crasha sem mas talvez precise
             intent.putExtra("assunto", assunto)
             intent.putExtra("comentario", comentario)
-            **/
             startActivity(intent)
             finish()
+        }
+    }
+    override fun onStop() {
+        super.onStop()
+        //Encerra a referência do banco de dados Firebase quando a atividade é encerrada
+        databaseRef.removeEventListener(databaseListener)
+    }
+
+    //Adiciona um bloco try-catch ao usar a referência do banco de dados Firebase
+    private val databaseListener = object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            try {
+                // Implemente aqui as operações que utilizam a referência do banco de dados
+            } catch (e: Exception) {
+                Log.e("VisualizarComentario", "Erro ao acessar o banco de dados Firebase", e)
+            }
+        }
+
+        override fun onCancelled(databaseError: DatabaseError) {
+            Log.e("VisualizarComentario", "Operação cancelada no banco de dados Firebase", databaseError.toException())
         }
     }
 }
