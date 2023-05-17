@@ -191,12 +191,27 @@ class CadastroOsActivity: AppCompatActivity(){
             // Verifica se há um cliente selecionado
             if (selectedCliente != null) {
                 database = FirebaseDatabase.getInstance().getReference("ordens")
-                val OrdemDeServico = OrdemDeServico(selectedCliente!!,nomeServico,id,preco,desconto,total)
+                val ordemDeServico = OrdemDeServico(selectedCliente!!,nomeServico,id,preco,desconto,total)
 
-                //Chamada de função para atualizar o orçamento ||ainda não funciona
+                //Chamada de função para atualizar o orçamento
                 selectedCliente?.atualizarOrcamento(total)
 
-                database.child(id).setValue(OrdemDeServico).addOnSuccessListener {
+                // Salva a ordem de serviço com status "encerrada = false"
+                ordemDeServico.encerrada = false
+
+                database.child(id).setValue(ordemDeServico).addOnSuccessListener {
+
+                    // Atualiza o orçamento do cliente selecionado
+                    selectedCliente?.let { cliente ->
+                        val orcamentoAtualizado = cliente.orcamento?.minus(total)
+                        cliente.orcamento = orcamentoAtualizado
+                        val clientesRef = FirebaseDatabase.getInstance().getReference("clientes")
+                        clientesRef.child(cliente.codigo.toString()).setValue(cliente).addOnSuccessListener {
+                            //Toast.makeText(this, "Ordem cadastrada com sucesso!", Toast.LENGTH_SHORT).show()
+                        }.addOnFailureListener {
+                            Toast.makeText(this, "Falha ao atualizar orçamento do cliente!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
 
                     binding.editTextNomeServico.text.clear()
                     binding.editTextId.text.clear()

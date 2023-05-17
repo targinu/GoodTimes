@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.atividaden1.databinding.ActivityComentariosBinding
 import com.google.firebase.database.*
@@ -82,7 +83,6 @@ class ComentariosActivity : AppCompatActivity() {
                     tableRow.addView(excluirImageView)
                     **/
 
-
                     //Visualização de comentario
                     //Adiciona um OnClickListener para cada linha da tabela
                     tableRow.setOnClickListener {
@@ -115,6 +115,15 @@ class ComentariosActivity : AppCompatActivity() {
             intent.putExtras(bundle)
             startActivity(intent)
             finish()
+        }
+
+        // Encerrar ordem
+        binding.btnEncerrar.setOnClickListener {
+            val id = binding.textViewIdDesc.text.toString()
+            val ordensRef = FirebaseDatabase.getInstance().getReference("ordens").child(id)
+            ordensRef.child("encerrada").setValue(true)
+
+            Toast.makeText(this@ComentariosActivity, "Ordem encerrada.", Toast.LENGTH_SHORT).show()
         }
 
         //VOLTAR PARA A TELA ANTERIOR
