@@ -188,23 +188,28 @@ class CadastroOsActivity: AppCompatActivity(){
             val desconto = binding.editTextDesconto.text.toString().toFloat()
             val total = binding.textViewValorTotal.text.toString().toFloat()
 
-            database = FirebaseDatabase.getInstance().getReference("ordens")
-            val OrdemDeServico = OrdemDeServico(selectedCliente!!,nomeServico,id,preco,desconto,total)
+            // Verifica se há um cliente selecionado
+            if (selectedCliente != null) {
+                database = FirebaseDatabase.getInstance().getReference("ordens")
+                val OrdemDeServico = OrdemDeServico(selectedCliente!!,nomeServico,id,preco,desconto,total)
 
-            //Chamada de função para atualizar o orçamento ||ainda não funciona
-            selectedCliente?.atualizarOrcamento(total)
+                //Chamada de função para atualizar o orçamento ||ainda não funciona
+                selectedCliente?.atualizarOrcamento(total)
 
-            database.child(id).setValue(OrdemDeServico).addOnSuccessListener {
+                database.child(id).setValue(OrdemDeServico).addOnSuccessListener {
 
-                binding.editTextNomeServico.text.clear()
-                binding.editTextId.text.clear()
-                binding.editTextPreco.text.clear()
-                binding.editTextDesconto.text.clear()
+                    binding.editTextNomeServico.text.clear()
+                    binding.editTextId.text.clear()
+                    binding.editTextPreco.text.clear()
+                    binding.editTextDesconto.text.clear()
 
-                Toast.makeText(this,"Ordem cadastrada com sucesso!",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"Ordem cadastrada com sucesso!",Toast.LENGTH_SHORT).show()
 
-            }.addOnFailureListener{
-                Toast.makeText(this,"Falha ao cadastrar ordem!",Toast.LENGTH_SHORT).show()
+                }.addOnFailureListener{
+                    Toast.makeText(this,"Falha ao cadastrar ordem!",Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this,"Nenhum cliente selecionado!",Toast.LENGTH_SHORT).show()
             }
         }
 
