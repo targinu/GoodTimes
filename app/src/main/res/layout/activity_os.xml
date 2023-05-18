@@ -42,7 +42,7 @@
 
     <Button
         android:id="@+id/btnCadastrarOs"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Cadastrar OS"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -54,10 +54,10 @@
 
     <Button
         android:id="@+id/btnCanceladas"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Visualizar Canceladas"
-        android:textSize="10dp"
+        android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -68,10 +68,10 @@
 
     <Button
         android:id="@+id/btnEncerradas"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Visualizar Encerradas"
-        android:textSize="10dp"
+        android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
